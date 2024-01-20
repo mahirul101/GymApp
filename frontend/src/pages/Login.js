@@ -3,7 +3,22 @@ import {View, Text, TextInput, StatusBar, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 function Login() {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
     const navigation = useNavigation();
+    
+    const login = () => {
+        if (email === '') {
+            alert('Please enter your email');
+            return;
+        } else if (password === '') {
+            alert('Please enter your password');
+            return;
+        }
+
+        navigation.navigate('AppStack')
+    }
+
     return (
         <View className="bg-white h-full w-full">
             <StatusBar style="light" />
@@ -17,6 +32,8 @@ function Login() {
                     <View className="bg-gray-200 p-5 rounded-2xl w-full">
                         <TextInput 
                             placeholder="Email" 
+                            value={email}
+                            onTextInput={setEmail}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                         />
@@ -24,13 +41,15 @@ function Login() {
                     <View className="bg-gray-200 p-5 rounded-2xl w-full mb-10">
                         <TextInput 
                             placeholder="Password" 
+                            value={password}
+                            onTextInput={setPassword}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                             secureTextEntry
                         />
                     </View>
                     <View className="w-full">
-                        <TouchableOpacity  onPress={() => navigation.navigate('AppStack')}
+                        <TouchableOpacity  onPress={login}
                             className="w-full bg-red-700 p-3 rounded-2xl mb-3">
                             <Text className="text-center text-white font-bold">Sign In</Text>
                         </TouchableOpacity>
