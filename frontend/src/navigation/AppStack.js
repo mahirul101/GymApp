@@ -15,7 +15,7 @@ export default function AppStack() {
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name='Main'>
+                <Tab.Screen name='Feed'>
                     {() => <Main />}
                 </Tab.Screen>
                 <Tab.Screen name='Create Session'>
