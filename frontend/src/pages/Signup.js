@@ -14,6 +14,13 @@ function SignUp() {
                 </View>
 
                 <View className="mx-4 space-y-4">
+                <View className="bg-gray-200 p-5 rounded-2xl w-full">
+                        <TextInput 
+                            placeholder="Full Name" 
+                            placeholderTextColor="gray"
+                            className="text-black" // Adjust the text color to ensure visibility
+                        />
+                    </View>
                     <View className="bg-gray-200 p-5 rounded-2xl w-full">
                         <TextInput 
                             placeholder="Email" 
