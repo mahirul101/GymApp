@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback } from "react-native"
+import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity} from "react-native"
 import React from 'react'
 import moment from 'moment'
 import Swiper from 'react-native-swiper'
@@ -8,17 +8,6 @@ export default function Dev() {
     const swiper = React.useRef();
     const [value, setValue] = React.useState(new Date());
     const [week, setWeek]  = React.useState(0);
-
-
-    // const dates = [
-    //     {   weekday: "Sun", date: new Date() } ,
-    //     {   weekday: "Mon", date: new Date() } ,
-    //     {   weekday: "Tue", date: new Date() } ,
-    //     {   weekday: "Wed", date: new Date() } ,
-    //     {   weekday: "Thu", date: new Date() } ,
-    //     {   weekday: "Fri", date:  new Date() } ,
-    //     {   weekday: "Sat", date: new Date()   }
-    // ]
 
     const weeks = React.useMemo(() => {
         const start = moment(start).add(weeks, 'weeks').startOf('week');
@@ -107,6 +96,26 @@ export default function Dev() {
                         ))}
                     </Swiper>
                 </View>
+
+                <View style = {{flex:8 , paddingVertical: 5, paddingHorizontal : 10}}>
+                    <Text style = {styles.contentText}>{value.toDateString()}</Text>
+
+
+                    <View style = {styles.placeholder}>
+                        <View style = {styles.placeholderContent}>
+                        {/*ADD STUFF HERE*/}
+                        </View>
+                    </View>
+
+                    <View style = {styles.footer}>
+                        <TouchableOpacity style = {styles.btn} onPress={() => {
+                           //handle create session 
+                        }}>
+                            <Text style = {styles.btnText}>Create Session</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
             </View>
         </SafeAreaView>
     );
@@ -129,6 +138,13 @@ const styles = StyleSheet.create({
 
     header: {
         paddingHorizontal : 16,
+    },
+
+    contentText: {
+        fontSize: 17,
+        fontWeight: '600',
+        color: '#333',
+        marginBottom: 12,
     },
 
     title: {
@@ -168,6 +184,49 @@ const styles = StyleSheet.create({
     itemDate: {
         fontSize: 13,
         fontWeight: 'bold',
-    }   
+    },
     
+    placeholder: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 0,
+        height: 400,
+        marginTop: 0,
+        padding: 0,
+        backgroundColor: 'transparent',
+      },
+
+      placeholderContent: {
+        borderWidth: 4,
+        borderColor: '#e5e7eb',
+        borderStyle: 'dashed',
+        borderRadius: 9,
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 0,
+      },
+
+      footer:{
+        marginTop: 24,  
+        paddingHorizontal: 16,
+      },
+      
+      /** Button */
+      btn: {
+        flexDirection: 'row',
+        backgroundColor: '#007aff',
+        borderWidth: 1,
+        borderColor: '#007aff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+      },
+      btnText: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#fff',
+      },
 });
