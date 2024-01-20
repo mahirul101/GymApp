@@ -2,14 +2,12 @@ import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppStack from './frontend/src/navigation/AppStack';
-
-const Tab = createBottomTabNavigator();
+import AppNav from './frontend/src/navigation/AppNav';
 
 export default function App() {
   return (
-    <AppStack />
+    <AppNav />
   );
 }
 
