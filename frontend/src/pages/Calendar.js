@@ -4,5 +4,6 @@ export default function Dev() {
 
     return (<View>
         <Text>Dev</Text>
+        
     </View>)
 }
