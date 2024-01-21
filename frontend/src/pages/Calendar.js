@@ -68,7 +68,7 @@ export default function Dev() {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <View style={{ ...styles.header, borderBottomWidth: '1', borderColor: '#c2c5cc' }}>
-                  <Text style={styles.title}>Timetable</Text>
+                  <Text style={styles.title}>Calendar</Text>
                 </View>
 
                 <View style={styles.picker}>
