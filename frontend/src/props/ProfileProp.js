@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import {
   View,
   Text,
@@ -19,10 +21,12 @@ const ProfileProp = ({
   followers,
   following,
 }) => {
+  const navigation = useNavigation();
+
   return (
     <>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => console.log("Settings Pressed")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
           <MaterialIcons name="settings" size={30} color="black" />
         </TouchableOpacity>
       </View>
