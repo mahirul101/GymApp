@@ -196,3 +196,20 @@ export const removeSession = async (email, username, workoutType, location, date
         return { success: false, message: error.message };
     }
 };
+
+export const updateAbout = async (email, newAbout) => {
+    try {
+        const userData = await AsyncStorage.getItem(email);
+        if (userData === null) {
+            return { success: false, message: 'User not found' };
+        }
+
+        const user = JSON.parse(userData);
+        user.aboutBio = newAbout; // Update the about section
+
+        await AsyncStorage.setItem(email, JSON.stringify(user));
+        return { success: true, message: 'About updated successfully' };
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+};
