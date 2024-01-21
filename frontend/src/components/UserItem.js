@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fdfdfd",
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     padding: 10,
-    marginVertical: 3,
+    margin: 7,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

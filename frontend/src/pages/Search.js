@@ -15,6 +15,7 @@ import UserItem from "../components/UserItem";
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const searchUsers = async () => {
@@ -26,7 +27,7 @@ const Search = () => {
 
     // Simulated API response
     setTimeout(() => {
-      setUsers([
+      const fetchedUsers = [
         {
           id: 1,
           fullName: "John Doe",
@@ -49,7 +50,17 @@ const Search = () => {
             "https://media.licdn.com/dms/image/D5603AQEc6r1yindqVQ/profile-displayphoto-shrink_400_400/0/1671588060033?e=1711584000&v=beta&t=Zgb2gcaz4uWJbpzL8uZ8Z1yF4dDJMuQ0ChQGlGjF5vY",
         },
         // Add more dummy users here
-      ]);
+      ];
+
+      // Filter users based on the search query
+      const filtered = fetchedUsers.filter(
+        (user) =>
+          user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.username.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      setUsers(fetchedUsers);
+      setFilteredUsers(filtered);
       setIsLoading(false);
     }, 2000);
   };
@@ -80,11 +91,11 @@ const Search = () => {
           />
         </View>
         {isLoading ? (
-          <Text style={{ textAlign: "center" }}>Loading...</Text>
-        ) : (
+          <Text style={styles.MiddleText}>Loading...</Text>
+        ) : filteredUsers.length > 0 ? (
           <View style={styles.userContainer}>
             <FlatList
-              data={users}
+              data={filteredUsers}
               renderItem={({ item }) => (
                 <UserItem
                   userImage={item.userImage}
@@ -92,9 +103,11 @@ const Search = () => {
                   username={item.username}
                 />
               )}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.id.toString()}
             />
           </View>
+        ) : (
+          <Text style={styles.MiddleText}>Buddy not found 404</Text>
         )}
       </View>
     </SafeAreaView>
@@ -123,13 +136,18 @@ const styles = StyleSheet.create({
     // backgroundColor: "black",
   },
   item: {
-    backgroundColor: "#f9c2ff",
+    backgroundColor: "#fff",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
   },
   title: {
     fontSize: 20,
+  },
+  MiddleText: {
+    textAlign: "center",
+    fontSize: 16,
+    marginTop: 20,
   },
 });
 
