@@ -42,7 +42,7 @@ export default function AppStack() {
     >
       <Tab.Screen
         name={CalendarPage}
-        component={Calendar}
+        component={SessionStack}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
