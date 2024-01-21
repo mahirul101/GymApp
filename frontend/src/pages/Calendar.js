@@ -3,27 +3,27 @@ import React from 'react'
 import moment from 'moment'
 import Swiper from 'react-native-swiper'
 
-
 export default function Dev() {
     const swiper = React.useRef();
     const [value, setValue] = React.useState(new Date());
     const [week, setWeek]  = React.useState(0);
 
+
     const weeks = React.useMemo(() => {
-        const start = moment(start).add(weeks, 'weeks').startOf('week');
-
-
+        const start = moment().add(week, 'weeks').startOf('week');
+    
         return [-1, 0, 1].map(adj => {
-            return Array.from({ length: 7 }).map((_, index) => {
-                const date = moment(start).add(adj, 'week').add(index, 'day')
-
-                return {
-                    weekday: date.format('ddd'),
-                    date : date.toDate(),
-                };
-            });
+          return Array.from({ length: 7 }).map((_, index) => {
+            const date = moment(start).add(adj, 'week').add(index, 'day');
+    
+            return {
+              weekday: date.format('ddd'),
+              date: date.toDate(),
+            };
+          });
         });
-    }, [week]);
+      }, [week]);
+
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -33,69 +33,72 @@ export default function Dev() {
                 </View>
 
                 <View style={styles.picker}>
-                    <Swiper
-                        index = {1} ref = {swiper} showsPagination = {false} loop = {false}
-                        onIndexChanged={(index) => {
-                            if (index === 1) {
-                                return
-                            }
+                <Swiper
+            index={1}
+            ref={swiper}
+            loop={false}
+            showsPagination={false}
 
-                            setTimeout(() => {
-                                const newIndex = index - 1
-                                const newWeek = week + newIndex
-                                setWeek(newWeek);
-                                setValue(moment(value).add(newIndex, 'week').toDate());
-                                swiper.current.scrollTo(1, false);
-                            },100);
-                        }}>
-                            
-                        {weeks.map((dates, index) => (
-                            <View 
-                                style={[styles.itemRow, { paddingHorizontal: 16}]}
-                                key = {index}>
-                                {dates.map((item, dateIndex) => {
-                                    const isActive =
-                                        value.toDateString() === item.date.toDateString(); 
-                                    return  (
-                                    <TouchableWithoutFeedback 
-                                        key={dateIndex} 
-                                        onPress={() => setValue(item.date)}>
-                                        <View
-                                            style ={[
-                                                styles.item,
-                                                isActive && {
-                                                    borderColor: "#111"
-                                                },
-                                            ]}>
-                                            <Text 
-                                                style = {[
-                                                    styles.itemWeekday,
-                                                    isActive && {
-                                                        color: "#111",
-                                                    },
-                                                ]}>
-                                                {item.weekday}
-                                            </Text>
+            onIndexChanged={ind => {
+             if (ind === 1) {
+                return;
+              }
+              setTimeout(() => {
+                const newIndex = ind - 1;
+                const newWeek = week + newIndex;
+                setWeek(newWeek);
+                setValue(moment(value).add(newIndex, 'week').toDate());
+                swiper.current.scrollTo(1, false);
+              }, 100);
+            }}>
+                                           
+            {weeks.map((dates, index) => (
+                <View 
+                    style={[styles.itemRow, { paddingHorizontal: 16}]}
+                    key = {index}>
+                    {dates.map((item, dateIndex) => {
+                        const isActive =
+                            value.toDateString() === item.date.toDateString(); 
+                        return  (
+                        <TouchableWithoutFeedback 
+                            key={dateIndex} 
+                            onPress={() => setValue(item.date)}>
+                            <View
+                                style ={[
+                                    styles.item,
+                                    isActive && {
+                                        borderColor: "#111"
+                                    },
+                                ]}>
+                                <Text 
+                                    style = {[
+                                        styles.itemWeekday,
+                                        isActive && {
+                                            color: "#111",
+                                        },
+                                    ]}>
+                                    {item.weekday}
+                                </Text>
 
-                                            <Text
-                                                style={[
-                                                    styles.itemDate,
-                                                    isActive && {
-                                                        color: "#111",
-                                                    },
-                                                ]}
-                                            >
-                                                {item.date.getDate()}
-                                            </Text>
-                                        </View>
-                                    </TouchableWithoutFeedback>
-                                );
-                            })}
+                                <Text
+                                    style={[
+                                        styles.itemDate,
+                                        isActive && {
+                                            color: "#111",
+                                        },
+                                    ]}
+                                >
+                                    {item.date.getDate()}
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        );
+                    })}
                         
-                        </View>
-                        ))}
-                    </Swiper>
                 </View>
+                ))}
+            </Swiper>
+            </View>
 
                 <View style = {{flex:8 , paddingVertical: 5, paddingHorizontal : 10}}>
                     <Text style = {styles.contentText}>{value.toDateString()}</Text>

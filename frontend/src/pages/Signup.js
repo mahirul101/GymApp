@@ -1,17 +1,16 @@
 import {View, Text, TextInput, StatusBar, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {onRegisterPress} from '../../../backend/Database';
 
 function SignUp() {
-    const [fullName, setFullName] = React.useState('');
-    const [username, setUsername] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+  const [fullName, setFullName] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    const SignUp = async () => {
+    const SignUp = () => {
         if (fullName === '') {
             alert('Please enter your full name');
             return;
@@ -26,19 +25,7 @@ function SignUp() {
             return;
         }
 
-       const data = await onRegisterPress(email, password, fullName, username);
-
-        message = data.message;
-        userDetails = data.userDetails;
-
-        if (data.success) {
-            navigation.navigate('AppStack', {userDetails});
-        } else {
-            alert(message);
-            return;
-        }
-
-        
+        navigation.navigate('AppStack');
     }
     return (
         <View className="bg-white h-full w-full">
@@ -54,14 +41,16 @@ function SignUp() {
                         <TextInput 
                             placeholder="Full Name" 
                             placeholderTextColor="gray"
-                            onChangeText={setFullName}
+                            value={fullName}
+                            onTextInput={setFullName}
                             className="text-black" // Adjust the text color to ensure visibility
                         />
                     </View>
                     <View className="bg-gray-200 p-5 rounded-2xl w-full">
                         <TextInput 
                             placeholder="Username"
-                            onChangeText={setUsername}
+                            value={username}
+                            onTextInput={setUsername}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                         />
@@ -69,7 +58,8 @@ function SignUp() {
                     <View className="bg-gray-200 p-5 rounded-2xl w-full">
                         <TextInput 
                             placeholder="Email" 
-                            onChangeText={setEmail}
+                            value={email}
+                            onTextInput={setEmail}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                         />
@@ -77,7 +67,8 @@ function SignUp() {
                     <View className="bg-gray-200 p-5 rounded-2xl w-full mb-10">
                         <TextInput 
                             placeholder="Password" 
-                            onChangeText={setPassword}
+                            value={password}
+                            onTextInput={setPassword}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                             secureTextEntry
