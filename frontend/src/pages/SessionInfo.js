@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   ScrollView,
   Button,
-  Stylesheet,
+  StyleSheet,
 } from "react-native";
-
 import { Picker } from 'react-native-picker';
+import React, { useContext, useState } from "react";
+import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useContext } from "react";
@@ -19,10 +20,8 @@ import axios from "axios";
 import Config from "react-native-config";
 
 function SessionInfo() {
-  const apiKey = Config.GOOGLEMAPS_API_KEY;
-
-  const [WorkoutType, setWorkoutType] = useState("");
-  const [Location, setLocation] = useState("");
+  const [WorkoutType, setWorkoutType] = React.useState("");
+  const [Location, setLocation] = React.useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [date, setDate] = React.useState(new Date());
   const [Time, setTime] = React.useState("");
@@ -30,39 +29,26 @@ function SessionInfo() {
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
 
-  const [show, setShow] = React.useState(false);
-  const [mode, setMode] = React.useState('date');
 
   const [selected, setSelected] = React.useState("");
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDate(false);
+    setShowTime(false);
+    setDate(currentDate);
+  };
 
   const navigation = useNavigation();
 
   const SessionInfo = () => {
-    const showMode = (currentMode) => {
-      setMode(currentMode);
-      if (currentMode === "date") {
-        setShowDate(true);
-        setShowTime(false);
-      } else if (currentMode === "time") {
-        setShowDate(false);
-        setShowTime(true);
-      }
-    };
-
-    const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShowDate(false);
-      setShowTime(false);
-      setDate(currentDate);
-    };
-    
     if (WorkoutType === "") {
       alert("Please select your workout type");
       return;
     } else if (Location === "") {
       alert("Please enter the location of the workout");
       return;
-    } else if (Date === "") {
+    } else if (date === "") {
       alert("Please enter the date of the workout");
       return;
     } else if (Time === "") {
@@ -94,6 +80,8 @@ function SessionInfo() {
     setLocation(suggestion.description); // Set the clicked suggestion as the location
     setSuggestions([]); // Clear suggestions after selection
   };
+
+
 
   return (
     <View className="bg-white h-full w-full">
@@ -153,49 +141,50 @@ function SessionInfo() {
               </ScrollView>
             )}
           </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom :100 }}>
-            <View style={{ flex: 0, marginRight: 10, width:120, marginLeft: 30 }}>
-            <Text style={{ fontSize: 18}}>Date:</Text>
-                {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 14, alignItems: "center" }}> */}
-                <DateTimePicker 
-                style={{ flex: 0}}
-                    value={date}
-                    mode="date"
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                />
-                {/* </View> */}
-            </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom :100 }}>
+          <View style={{ flex: 0, marginRight: 10, width:120, marginLeft: 30 }}>
+          <Text style={{ fontSize: 18}}>Date:</Text>
+              {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 14, alignItems: "center" }}> */}
+              <DateTimePicker 
+              style={{ flex: 0}}
+                  value={date}
+                  mode="date"
+                  is24Hour={true}
+                  display="default"
+                  onChange={onChange}
+              />
+              {/* </View> */}
+          </View>
 
-            <View style={{flex: 0, marginRight: 85, width:120, marginLeft: 20 }}>
-                {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 100, alignItems: "center"}}> */}
-                <Text style={{ fontSize: 18 }}>Time:</Text>
-                <DateTimePicker
-                    style={{ flex: 0}}
-                    value={date}
-                    mode="time"
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                />
-
-                {/* </View> */}
-            </View>
-        </View>
-        <View className="w-full">
-            <TouchableOpacity
-            onPress={SessionInfo}
-            className="w-80 bg-red-700 p-4 rounded-2xl mb-20 mx-auto text-center"
-            
-            >
-            <Text className="text-center text-white font-bold">Create Session</Text>
-            </TouchableOpacity>
-        </View>
-        </View>
+          <View style={{flex: 0, marginRight: 85, width:120, marginLeft: 20 }}>
+              {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 100, alignItems: "center"}}> */}
+              <Text style={{ fontSize: 18 }}>Time:</Text>
+              <DateTimePicker
+                  style={{ flex: 0}}
+                  value={date}
+                  mode="time"
+                  is24Hour={true}
+                  display="default"
+                  onChange={onChange}
+              />
+          </View>
       </View>
-    </View>
+      </View> 
+
+    
+      <View className="w-full">
+          <TouchableOpacity
+          onPress={SessionInfo}
+          className="w-80 bg-red-700 p-4 rounded-2xl mb-20 mx-auto text-center"
+          
+          >
+          <Text className="text-center text-white font-bold">Create Session</Text>
+          </TouchableOpacity>
+      </View>
+      </View>
+      </View>
   );
 }
+
 
 export default SessionInfo;
