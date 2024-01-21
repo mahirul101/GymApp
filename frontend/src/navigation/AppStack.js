@@ -37,12 +37,12 @@ export default function AppStack() {
         activeTintColor: "#FF0000",
         inactiveTintColor: "gray",
         labelStyle: { fontSize: 10, paddingBottom: 0 },
-        style: { height: 60, paddingTop: 10  },
+        style: { height: 60, paddingTop: 10 },
       }}
     >
       <Tab.Screen
         name={CalendarPage}
-        component={Calendar}
+        component={SessionStack}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons

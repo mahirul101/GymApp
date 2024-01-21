@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useUser } from '../../../backend/User';
 import Loading from '../components/Loading';
 import Settings from '../pages/Settings';
+import Calendar from '../pages/Calendar';
+import SessionInfo from '../pages/SessionInfo';
 const Stack = createNativeStackNavigator();
 
 export default function AppNav() {
