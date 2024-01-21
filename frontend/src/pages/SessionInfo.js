@@ -13,9 +13,7 @@ import React, { useContext, useState } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useContext } from "react";
 import SelectList from "react-native-dropdown-select-list";
-import RNPickerSelect from "react-native-picker-select";
 import axios from "axios";
 import Config from "react-native-config";
 
