@@ -1,66 +1,57 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {Button} from "react-native";
-import {useUser, clearUser} from '../../../backend/User';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { CommonActions } from '@react-navigation/native';
+import { useUser } from '../../../backend/User';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { Ionicons } from '@expo/vector-icons'; // Ensure to install this package
 
+const Settings = ({ navigation }) => {
+  const { clearUser } = useUser();
+  const scale = useSharedValue(1);
 
-const Settings = ({navigation}) => {
-  const {clearUser} = useUser();
   const handleLogout = async () => {
-    await clearUser(); // Clear the user data from AsyncStorage and context
+    await clearUser();
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
         routes: [{ name: 'LoginStack' }],
       })
     );
-    
   };
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+    };
+  });
+
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Text style={styles.title}>Settings</Text>
+    <SafeAreaView className="bg-gray-100 flex-1">
+      <View className="p-5 bg-white rounded-lg m-3 shadow">
+        <Text className="text-4xl font-bold mb-10 text-gray-800">Settings</Text>
+
+        <Animated.View style={[animatedStyle]}>
+          <TouchableOpacity
+            className="flex-row bg-red-500 p-4 rounded-lg items-center justify-center mb-4"
+            onPress={handleLogout}
+            onPressIn={() => { scale.value = withSpring(0.95); }}
+            onPressOut={() => { scale.value = withSpring(1); }}
+          >
+            <Ionicons name="log-out-outline" size={24} color="white" />
+            <Text className="text-white text-lg ml-2">Logout</Text>
+          </TouchableOpacity>
+        </Animated.View>
 
         <TouchableOpacity
-          style={styles.button}
-          onPress={handleLogout}
+          className="bg-green-500 p-4 rounded-lg items-center justify-center"
+          onPress={() => navigation.goBack()}
         >
-          <Text style={styles.buttonText}>Logout</Text>
+          <Text className="text-white text-lg">Back to Profile</Text>
         </TouchableOpacity>
-
-        <Button title="Back to Profile" onPress={() => navigation.goBack()} />
-
-        {/* Additional settings items can be added here */}
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "#f44336", // Red color for the logout button
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-  },
-  // Additional styles can be added here
-});
 
 export default Settings;

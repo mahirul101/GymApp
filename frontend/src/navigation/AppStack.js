@@ -85,7 +85,7 @@ export default function AppStack() {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? "searc" : "search-outline"}
+              name={focused ? "search" : "search-outline"}
               size={size}
               color={color}
             />
