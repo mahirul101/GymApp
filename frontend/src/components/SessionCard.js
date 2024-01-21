@@ -66,7 +66,7 @@ const SessionCard = ({ workoutType, date, time, location, creator }) => {
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingBottom:10   }}>
                                 <AntDesign name='user' size={24} color='black' />
-                                <Text style = {{ fontWeight: 'bold'}}>{user}</Text>
+                                <Text style = {{ fontWeight: 'bold'}}>{user.username}</Text>
 
         
                             </View>
