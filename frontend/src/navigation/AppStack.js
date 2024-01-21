@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
-
+import Search from "../pages/Search";
 import Profile from "../pages/Profile";
 import Chatbot from "../pages/Chatbot";
 import SessionStack from "./SessionStack";
@@ -21,6 +21,7 @@ const SessionsPage = "Sessions";
 const CalendarPage = "Calendar";
 const ProfilePage = "Profile";
 const ChatbotPage = "Chatbot";
+const SearchPage = "Search";
 const SettingsPage = "Settings";
 
 const Tab = createBottomTabNavigator();
@@ -28,7 +29,7 @@ const Tab = createBottomTabNavigator();
 export default function AppStack() {
   return (
     <Tab.Navigator
-      initialRouteName={MainPage}
+      initialRouteName={CalendarPage}
       screenOptions={{
         headerShown: false,
       }}
@@ -40,12 +41,12 @@ export default function AppStack() {
       }}
     >
       <Tab.Screen
-        name={MainPage}
-        component={Main}
+        name={CalendarPage}
+        component={Calendar}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? "home" : "home-outline"}
+              name={focused ? "calendar" : "calendar-outline"}
               size={size}
               color={color}
             />
@@ -66,12 +67,12 @@ export default function AppStack() {
         }}
       />
       <Tab.Screen
-        name={CalendarPage}
-        component={Calendar}
+        name={ProfilePage}
+        component={Profile}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? "calendar" : "calendar-outline"}
+              name={focused ? "person" : "person-outline"}
               size={size}
               color={color}
             />
@@ -79,12 +80,12 @@ export default function AppStack() {
         }}
       />
       <Tab.Screen
-        name={ProfilePage}
-        component={Profile}
+        name={SearchPage}
+        component={Search}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? "person" : "person-outline"}
+              name={focused ? "searc" : "search-outline"}
               size={size}
               color={color}
             />
