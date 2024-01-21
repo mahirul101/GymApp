@@ -5,10 +5,14 @@ import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Profile from "../pages/Profile";
 import Calendar from "../pages/Calendar";
+import {useRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 export default function AppStack() {
+    // const route = useRoute();
+    // const {user} = route.params;
+    
     return (
         <Tab.Navigator>
             <Tab.Screen name='Main' component={Main} />

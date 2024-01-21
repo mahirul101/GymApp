@@ -2,10 +2,12 @@ import React, {useContext} from 'react';
 import {View, Text, TextInput, StatusBar, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {onLoginPress} from '../../../backend/Database';
+import {useUser, saveUser} from '../../../backend/User';
 
 function Login() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const { setUser } = useUser();
     const navigation = useNavigation();
     
     const login = async () => {
@@ -22,6 +24,8 @@ function Login() {
         user = data.userDetails;
 
         if (data.success) {
+            const user = data.userDetails;
+            setUser(user);
             navigation.navigate('AppStack', {user});
         } else {
             message = data.message;
