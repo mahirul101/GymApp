@@ -22,6 +22,7 @@ const SessionCard = ({ workoutType, date, time, location, creator }) => {
   if (!user) {
     return <Text>User data is not available</Text>;
   }
+  const cardHeight = useRef(new Animated.Value(140)).current;
 
   const selectSession = async () => {
     if (!isSelected) {
