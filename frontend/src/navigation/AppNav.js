@@ -5,7 +5,7 @@ import AppStack from './AppStack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useUser } from '../../../backend/User';
 import Loading from '../components/Loading';
-
+import Settings from '../pages/Settings';
 const Stack = createNativeStackNavigator();
 
 export default function AppNav() {
@@ -31,6 +31,7 @@ export default function AppNav() {
                 <Stack.Navigator screenOptions={{headerShown: false}}>
                     <Stack.Screen name="AppStack" component={AppStack} />
                     <Stack.Screen name="LoginStack" component={LoginStack} />
+                    <Stack.Screen name="Settings" component={Settings} />
                     {/* Optionally include LoginStack here if needed */}
                 </Stack.Navigator>
             </NavigationContainer>
@@ -41,6 +42,7 @@ export default function AppNav() {
                 <Stack.Navigator screenOptions={{headerShown: false}}>
                     <Stack.Screen name="LoginStack" component={LoginStack} />
                     <Stack.Screen name="AppStack" component={AppStack} />
+                    <Stack.Screen name="Settings" component={Settings} />
                     {/* Optionally include AppStack here if needed */}
                 </Stack.Navigator>
             </NavigationContainer>

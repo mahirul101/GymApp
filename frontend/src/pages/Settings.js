@@ -1,9 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button } from "react-native";
+import {Button} from "react-native";
+import {useUser, clearUser} from '../../../backend/User';
+import { CommonActions } from '@react-navigation/native';
 
-const Settings = ({ navigation }) => {
+
+const Settings = ({navigation}) => {
+  const {clearUser} = useUser();
+  const handleLogout = async () => {
+    await clearUser(); // Clear the user data from AsyncStorage and context
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'LoginStack' }],
+      })
+    );
+    
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -11,7 +26,7 @@ const Settings = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("LoginStack")}
+          onPress={handleLogout}
         >
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
