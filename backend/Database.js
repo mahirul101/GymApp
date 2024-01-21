@@ -110,11 +110,26 @@ export const addJoinSession = async (email, username, workoutType, location, dat
         };
 
         const user = JSON.parse(userData);
-        user.joinedSessions.push(session);
 
-        await AsyncStorage.setItem(email, JSON.stringify(user));
+        // Check if the session already exists in joinedSessions
+        const sessionExists = user.joinedSessions.find(s =>
+            s.username === session.username &&
+            s.workoutType === session.workoutType &&
+            s.location === session.location &&
+            s.date === session.date &&
+            s.time === session.time
+        );
 
-        return { success: true, message: 'Session added successfully', userDetails: user };
+        if (sessionExists) {
+            return { success: false, message: 'Session already added' };
+        } else {
+            user.joinedSessions.push(session);
+            // console.log(user.joinedSessions.length);
+
+            await AsyncStorage.setItem(email, JSON.stringify(user));
+
+            return { success: true, message: 'Session added successfully', userDetails: user };
+        }
     } catch (error) {
         return { success: false, message: error.message };
     }
