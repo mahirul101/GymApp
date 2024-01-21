@@ -21,7 +21,7 @@ export default function Calendar() {
 
     const renderSessionsForSelectedDate = () => {
         console.log(user);
-        if (user === null || user.mySessions.length === 0 || user.joinedSessions.length === 0)
+        if (user === null || user.mySessions.length === 0 && user.joinedSessions.length === 0)
             return <Text>No sessions for this date</Text>;
         const selectedDateString = moment(value).format("YYYY-MM-DD");
 
