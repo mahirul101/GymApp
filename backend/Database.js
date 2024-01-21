@@ -18,12 +18,23 @@ export const onRegisterPress = async (email, password, username, fullName) => {
             return {success: false, message: 'Email already exists'};
         }
 
+        const followers = [];
+        const following = [];
+        const myPosts = [];
+        const mySessions = [];
+        const joinedSessions = [];
+
         // Save the new user
         const newUser = {
             email,
-            password, // Remember to hash the password in a real app
+            password,
             username,
-            fullName
+            fullName,
+            followers,
+            following,
+            myPosts,
+            mySessions,
+            joinedSessions
         };
         await AsyncStorage.setItem(email, JSON.stringify(newUser));
         return {success: true, message: 'User registered successfully', userDetails: newUser};
