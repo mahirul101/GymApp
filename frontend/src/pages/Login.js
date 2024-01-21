@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, TextInput, StatusBar, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StatusBar, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {onLoginPress} from '../../../backend/Database';
 import {useUser, saveUser} from '../../../backend/User';
@@ -34,6 +34,10 @@ function Login() {
     }
 
     return (
+        <KeyboardAvoidingView
+            style={{flex: 1}}
+            behavior="padding"
+        >
         <View className="bg-white h-full w-full">
             <StatusBar style="light" />
             
@@ -76,7 +80,8 @@ function Login() {
                     </View>
                 </View>
             </View>
-        </View>
+            </View>
+            </KeyboardAvoidingView>
     );
 }
 
