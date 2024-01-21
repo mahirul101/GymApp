@@ -28,8 +28,8 @@ export default function Dev() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <View style = {styles.header}>
-                    <Text style = {styles.title}>Timetable</Text>
+                <View style={{ ...styles.header, borderBottomWidth: '1', borderColor: '#c2c5cc' }}>
+                  <Text style={styles.title}>Timetable</Text>
                 </View>
 
                 <View style={styles.picker}>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 32,
+        fontSize: 30,
         fontWeight: 'bold',
         color: '#333',
         marginBottom: 12,
