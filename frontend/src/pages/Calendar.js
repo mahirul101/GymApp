@@ -14,10 +14,13 @@ export default function Calendar() {
     const [value, setValue] = React.useState(new Date());
     const [week, setWeek] = React.useState(0);
     const { user } = useUser();
-    // if (user === null) return;
 
     const formatDate = (date) => moment(date).format("MMMM Do, YYYY");
-    const formatTime = (time) => moment(time, "HH:mm:ss").format("h:mm A");
+    const formatTime = (time) => {
+        // Assuming 'time' is a string in "HH:mm:ss" format
+        return moment(time, "HH:mm:ss").subtract(5, 'hours').format("h:mm A");
+    };
+    
 
     const renderSessionsForSelectedDate = () => {
         if (user.mySessions.length === 0 && user.joinedSessions.length === 0)

@@ -5,22 +5,18 @@ import {
   StatusBar,
   TouchableOpacity,
   ScrollView,
-  Button,
   StyleSheet,
 } from "react-native";
-import { Picker } from 'react-native-picker';
 import React, { useContext, useState } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from "@react-navigation/native";
-import SelectList from "react-native-dropdown-select-list";
 import axios from "axios";
 import Config from "react-native-config";
 import { addMySession } from "../../../backend/Database";
 import { useUser } from "../../../backend/User";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { ArrowBackIos } from "@mui/icons-material";
 
 function SessionInfo() {
   const [WorkoutType, setWorkoutType] = React.useState("");
@@ -42,9 +38,11 @@ function SessionInfo() {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
+    // Subtract 5 hours from the selected date
+    const adjustedDate = new Date(currentDate.getTime() - 5 * 60 * 60 * 1000);
     setShowDate(false);
     setShowTime(false);
-    setDate(currentDate);
+    setDate(adjustedDate);
   };
   const SessionInfo = async () => {
     if (WorkoutType === "") {
@@ -77,12 +75,14 @@ function SessionInfo() {
         setWorkoutType('');
       }
     };
+    const datePart = date.toLocaleDateString(); // Local date string
+    const timePart = date.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }); // Local time string
 
-    const [datePart, timePart] = date.toISOString().split('T');
-    const formattedTime = timePart.split(".")[0];
+    console.log(timePart);
 
     try {
-      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, formattedTime);
+      
+      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, timePart);
 
       console.log(data);
       if (data.success) {
@@ -130,13 +130,14 @@ function SessionInfo() {
           <View style={{ position: 'absolute', top: 50, left: 10 }}>
             {/* <Button title="< Back to Profile" onPress={() => navigation.goBack()} color="#B91C1C" /> */}
             <TouchableOpacity
-              style={styles.editIcon} // Replace with actual email
+              style={styles.editIcon}
+              onPress={() => navigation.goBack()}// Replace with actual email
             >
-              <MaterialIcons name="ArrowBackIos" size={24} color="white" />
+              <MaterialIcons name="arrow-back" size={24} color="white" />
             </TouchableOpacity>
           </View>
           <View className="items-center">
-            <Text className="text-5xl font-bold" style={{ marginBottom: 0 }}>Session Info</Text>
+            <Text className="text-5xl font-bold" style={{ marginBottom: 100 }}>Session Info</Text>
           </View>
 
           <View className="mx-4 space-y-4" >
@@ -275,7 +276,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0, // Adjust as needed
     top: 0, // Adjust as needed
-    backgroundColor: 'red', // Choose your color
+    backgroundColor: '#AA2E26', // Choose your color
     borderRadius: 20,
     padding: 5,
   }
