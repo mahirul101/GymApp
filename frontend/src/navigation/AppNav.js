@@ -7,10 +7,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 export default function AppNav() {
-    // let initialRouteName = 'LoginStack';
-    // if (true) {
-    //     initialRouteName = 'AppStack';
-    // }
+    let initialRouteName = 'LoginStack';
+    if (true) {
+        initialRouteName = 'AppStack';
+    }
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='AppStack' screenOptions={{ headerShown: false }}>
