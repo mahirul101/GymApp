@@ -22,7 +22,7 @@ const UserProfileScreen = () => {
   const following = user.following ? user.following.length : 0;
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="bg-white">
       <ProfileProp
         email={email}
         fullName={fullName}

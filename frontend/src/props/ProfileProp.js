@@ -41,8 +41,7 @@ const ProfileProp = ({
         <View style={styles.userContainer}>
           <Image source={{ uri: userImage }} style={styles.image} />
           <TouchableOpacity 
-            style={styles.editIcon} 
-            onPress={() => updateProfilePicture(email)} // Replace with actual email
+            style={styles.editIcon} // Replace with actual email
           >
             <MaterialIcons name="add" size={24} color="white" />
           </TouchableOpacity>
