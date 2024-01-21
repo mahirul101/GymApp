@@ -9,6 +9,7 @@ import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
 import Profile from "../pages/Profile";
 import Chatbot from "../pages/Chatbot";
+import SessionStack from './SessionStack';
 
 const Tab = createBottomTabNavigator();
 

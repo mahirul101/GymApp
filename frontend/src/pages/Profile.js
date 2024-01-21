@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import ProfileProp from "../props/ProfileProp";
-import Post from "./Post";
 
 const UserProfileScreen = () => {
   // Replace these with actual user data
@@ -14,11 +13,6 @@ const UserProfileScreen = () => {
   const posts = 10;
   const followers = 69;
   const following = 132;
-  const goals = [
-    "Build muscle mass",
-    "Improve strength and endurance",
-    "Maintain a healthy lifestyle",
-  ];
 
   return (
     <SafeAreaView>
