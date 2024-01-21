@@ -17,6 +17,8 @@ export default function Dev() {
     const formatTime = (time) => moment(time, "HH:mm:ss").format("h:mm A");
 
     const renderSessionsForSelectedDate = () => {
+        if (user.mySessions.length === 0 && user.joinedSessions.length === 0) 
+            return <Text>No sessions for this date</Text>;
         const selectedDateString = moment(value).format("YYYY-MM-DD");
 
         // Filter and display mySessions for the selected date
