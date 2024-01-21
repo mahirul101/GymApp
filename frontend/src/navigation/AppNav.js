@@ -26,4 +26,4 @@ export default function AppNav() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
