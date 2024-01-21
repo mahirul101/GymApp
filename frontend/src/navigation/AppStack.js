@@ -14,7 +14,7 @@ import Chatbot from "../pages/Chatbot";
 import SessionStack from "./SessionStack";
 import Settings from "../pages/Settings";
 
-import { useRoute } from '@react-navigation/native';
+import { useRoute } from "@react-navigation/native";
 
 const MainPage = "Main";
 const SessionsPage = "Sessions";

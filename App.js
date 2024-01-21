@@ -7,6 +7,8 @@ import AppNav from './frontend/src/navigation/AppNav';
 import { clearAll } from './backend/Database';
 import { UserProvider } from './backend/User';
 import Loading from './frontend/src/components/Loading';
+import { LinearGradient } from 'expo-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 
 export default function App() {
 
@@ -26,7 +28,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#161e24',
     alignItems: "center",
     justifyContent: "center",
   },

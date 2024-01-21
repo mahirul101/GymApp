@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useContext, useState } from "react";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Config from "react-native-config";
@@ -19,6 +19,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 function SessionInfo() {
+  const { user, setUser } = useUser();
   const [WorkoutType, setWorkoutType] = React.useState("");
   const [Location, setLocation] = React.useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -27,10 +28,6 @@ function SessionInfo() {
 
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
-
-  const { user, setUser } = useUser();
-  if (user === null) return;
-
 
   const [selected, setSelected] = React.useState("");
 
@@ -57,22 +54,22 @@ function SessionInfo() {
     }
 
     const workoutItems = [
-      { label: 'Cardio', value: 'cardio' },
-      { label: 'Arms', value: 'arms' },
-      { label: 'Chest', value: 'chest' },
-      { label: 'Back', value: 'back' },
-      { label: 'Shoulders', value: 'shoulders' },
-      { label: 'Legs', value: 'legs' },
-      { label: 'Upper Body', value: 'upperbody' },
-      { label: 'Lower Body', value: 'lowerbody' },
+      { label: "Cardio", value: "cardio" },
+      { label: "Arms", value: "arms" },
+      { label: "Chest", value: "chest" },
+      { label: "Back", value: "back" },
+      { label: "Shoulders", value: "shoulders" },
+      { label: "Legs", value: "legs" },
+      { label: "Upper Body", value: "upperbody" },
+      { label: "Lower Body", value: "lowerbody" },
     ];
 
     const handleWorkoutTypeChange = (value) => {
-      const selectedItem = workoutItems.find(item => item.value === value);
+      const selectedItem = workoutItems.find((item) => item.value === value);
       if (selectedItem) {
         setWorkoutType(selectedItem.label);
       } else {
-        setWorkoutType('');
+        setWorkoutType("");
       }
     };
     const datePart = date.toLocaleDateString(); // Local date string
@@ -96,8 +93,7 @@ function SessionInfo() {
       alert("Error adding session: " + error.message);
     }
   };
-
-
+  
   const handleLocationChange = async (text) => {
     setLocation(text);
     if (text.length > 2) {
@@ -119,8 +115,6 @@ function SessionInfo() {
     setLocation(suggestion.description); // Set the clicked suggestion as the location
     setSuggestions([]); // Clear suggestions after selection
   };
-
-
 
   return (
     <SafeAreaView>
@@ -238,9 +232,9 @@ function SessionInfo() {
         </View>
       </View >
     </SafeAreaView>
+
   );
 }
-
 
 export default SessionInfo;
 
@@ -281,4 +275,3 @@ const styles = StyleSheet.create({
     padding: 5,
   }
 });
-
