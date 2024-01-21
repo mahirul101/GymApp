@@ -51,10 +51,7 @@ export default function Sessions() {
             {/* <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>
               Upcoming Sessions
             </Text> */}
-                <Text style = {styles.title}>Upcoming Sessions</Text>
-            <FloatingButton
-              onPress={() => navigation.navigate("SessionInfo")}
-            />
+            <Text style={styles.title}>Upcoming Sessions</Text>
             {/* <AntDesign name='filter' size={20} right={20}></AntDesign> */}
           </View>
           <ScrollView>
@@ -83,15 +80,17 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
   container: {
-        paddingVertical: 5,
+    paddingVertical: 5,
   },
 
-    title:{
-            fontSize: 30,
-            fontWeight: 'bold',
-            color: '#333',
-            marginLeft: 20, marginBottom: 10, marginTop: 20
-    },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#333",
+    marginLeft: 20,
+    marginBottom: 10,
+    marginTop: 20,
+  },
   cardTitle: {
     fontSize: 20,
     marginLeft: 10,

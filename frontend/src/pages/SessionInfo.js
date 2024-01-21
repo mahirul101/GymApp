@@ -8,16 +8,16 @@ import {
   Button,
   StyleSheet,
 } from "react-native";
-import { Picker } from 'react-native-picker';
+import { Picker } from "react-native-picker";
 import React, { useContext, useState } from "react";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { useNavigation } from "@react-navigation/native";
 import SelectList from "react-native-dropdown-select-list";
 import axios from "axios";
 import Config from "react-native-config";
 import { addMySession } from "../../../backend/Database";
-import {useUser} from "../../../backend/User";
+import { useUser } from "../../../backend/User";
 
 function SessionInfo() {
   const [WorkoutType, setWorkoutType] = React.useState("");
@@ -29,9 +29,8 @@ function SessionInfo() {
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
 
-  const {user, setUser} = useUser();
+  const { user, setUser } = useUser();
   if (user === null) return;
-  
 
   const [selected, setSelected] = React.useState("");
 
@@ -54,36 +53,43 @@ function SessionInfo() {
     } else if (date === "") {
       alert("Please enter the date of the workout");
       return;
-    } 
+    }
 
     const workoutItems = [
-      { label: 'Cardio', value: 'cardio' },
-      { label: 'Arms', value: 'arms' },
-      { label: 'Chest', value: 'chest' },
-      { label: 'Back', value: 'back' },
-      { label: 'Shoulders', value: 'shoulders' },
-      { label: 'Legs', value: 'legs' },
-      { label: 'Upper Body', value: 'upperbody' },
-      { label: 'Lower Body', value: 'lowerbody' },
+      { label: "Cardio", value: "cardio" },
+      { label: "Arms", value: "arms" },
+      { label: "Chest", value: "chest" },
+      { label: "Back", value: "back" },
+      { label: "Shoulders", value: "shoulders" },
+      { label: "Legs", value: "legs" },
+      { label: "Upper Body", value: "upperbody" },
+      { label: "Lower Body", value: "lowerbody" },
     ];
-  
-    const [WorkoutType, setWorkoutType] = useState('');
-  
+
+    const [WorkoutType, setWorkoutType] = useState("");
+
     const handleWorkoutTypeChange = (value) => {
-      const selectedItem = workoutItems.find(item => item.value === value);
+      const selectedItem = workoutItems.find((item) => item.value === value);
       if (selectedItem) {
         setWorkoutType(selectedItem.label);
       } else {
-        setWorkoutType('');
+        setWorkoutType("");
       }
     };
-  
-    const [datePart, timePart] = date.toISOString().split('T');
+
+    const [datePart, timePart] = date.toISOString().split("T");
     const formattedTime = timePart.split(".")[0];
-  
+
     try {
-      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, formattedTime);
-  
+      const data = await addMySession(
+        user.email,
+        user.username,
+        WorkoutType,
+        Location,
+        datePart,
+        formattedTime
+      );
+
       console.log(data);
       if (data.success) {
         alert(data.message);
@@ -96,7 +102,6 @@ function SessionInfo() {
       alert("Error adding session: " + error.message);
     }
   };
-  
 
   const handleLocationChange = async (text) => {
     setLocation(text);
@@ -119,8 +124,6 @@ function SessionInfo() {
     setLocation(suggestion.description); // Set the clicked suggestion as the location
     setSuggestions([]); // Clear suggestions after selection
   };
-
-
 
   return (
     <View className="bg-white h-full w-full">
@@ -180,41 +183,47 @@ function SessionInfo() {
               </ScrollView>
             )}
           </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom :100 }}>
-          <View style={{ flex: 0, marginRight: 10, width:120, marginLeft: 30 }}>
-          <Text style={{ fontSize: 18}}>Date:</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 100,
+            }}
+          >
+            <View
+              style={{ flex: 0, marginRight: 10, width: 120, marginLeft: 30 }}
+            >
+              <Text style={{ fontSize: 18 }}>Date:</Text>
               {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 14, alignItems: "center" }}> */}
-              <DateTimePicker 
-              style={{ flex: 0}}
-                  value={date}
-                  mode="date"
-                  is24Hour={true}
-                  display="default"
-                  onChange={onChange}
+              <DateTimePicker
+                style={{ flex: 0 }}
+                value={date}
+                mode="date"
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
               />
               {/* </View> */}
-          </View>
+            </View>
 
-          <View style={{flex: 0, marginRight: 85, width:120, marginLeft: 20 }}>
+            <View
+              style={{ flex: 0, marginRight: 85, width: 120, marginLeft: 20 }}
+            >
               {/* <View style={{ backgroundColor: "#E5E7EB", padding: 2, borderRadius: 8, marginBottom: 100, alignItems: "center"}}> */}
               <Text style={{ fontSize: 18 }}>Time:</Text>
               <DateTimePicker
-                  style={{ flex: 0}}
-                  value={date}
-                  mode="time"
-                  is24Hour={true}
-                  display="default"
-                
-                  onChange={onChange}
-                
+                style={{ flex: 0 }}
+                value={date}
+                mode="time"
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
               />
+            </View>
           </View>
-      </View>
-      </View> 
+        </View>
 
-    
-      <View style = {styles.footer}>
-
+        <View style={styles.footer}>
           {/* <TouchableOpacity
           onPress={SessionInfo}
           className="w-80 bg-red-700 p-4 rounded-2xl mb-20 mx-auto text-center"
@@ -223,47 +232,47 @@ function SessionInfo() {
           <Text className="text-center text-white font-bold text-base font-semibold">Create Session</Text>
           </TouchableOpacity> */}
 
-<TouchableOpacity style = {styles.btn} onPress={() => {
-                           //handle create session 
-                        }}>
-                            <Text style = {styles.btnText}>Create Session</Text>
-                        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              //handle create session
+            }}
+          >
+            <Text style={styles.btnText}>Create Session</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      </View>
-      </View>
+    </View>
   );
 }
-
 
 export default SessionInfo;
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  footer:{
-    marginTop: 24,  
+  footer: {
+    marginTop: 24,
     paddingHorizontal: 16,
   },
-        /** Button */
-        btn: {
-          flexDirection: 'row',
-          backgroundColor: '#B91C1C',
-          borderWidth: 1,
-          borderColor: '#B91C1C',
-          paddingVertical: 10,
-          paddingHorizontal: 20,
-          borderRadius: 8,
-          alignItems: 'center',
-          justifyContent: 'center',
-          
-        },
-        btnText: {
-          fontSize: 18,
-          fontWeight: '600',
-          color: '#fff',
-        },
+  /** Button */
+  btn: {
+    flexDirection: "row",
+    backgroundColor: "#B91C1C",
+    borderWidth: 1,
+    borderColor: "#B91C1C",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#fff",
+  },
 });
-

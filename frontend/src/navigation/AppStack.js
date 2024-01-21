@@ -14,7 +14,7 @@ import Chatbot from "../pages/Chatbot";
 import SessionStack from "./SessionStack";
 import Settings from "../pages/Settings";
 
-import { useRoute } from '@react-navigation/native';
+import { useRoute } from "@react-navigation/native";
 
 const MainPage = "Main";
 const SessionsPage = "Sessions";
@@ -36,7 +36,7 @@ export default function AppStack() {
         activeTintColor: "#FF0000",
         inactiveTintColor: "gray",
         labelStyle: { fontSize: 10, paddingBottom: 0 },
-        style: { height: 60, paddingTop: 10  },
+        style: { height: 60, paddingTop: 10 },
       }}
     >
       <Tab.Screen
