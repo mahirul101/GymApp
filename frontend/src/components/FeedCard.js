@@ -37,7 +37,7 @@ const FeedCard = ({ username, date, workoutName, duration, calories, photoUrl })
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 5, }}>
                             <TouchableOpacity onPress={() => { setIsLiked(!isLiked) }}>
-                                <AntDesign name={isLiked ? 'like2' : 'like1'} size="20" />
+                                <AntDesign name={isLiked ? 'like1' : 'like2'} size="20" />
                             </TouchableOpacity>
                         </View>
                     </View>

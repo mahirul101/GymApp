@@ -14,6 +14,7 @@ export default function Sessions() {
     //     // Navigate to the desired screen or modal
     //     navigation.navigate('SessionInfo');
     // };
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
     const sessions = [
