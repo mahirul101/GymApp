@@ -14,11 +14,8 @@ import SessionStack from './SessionStack';
 const Tab = createBottomTabNavigator();
 
 export default function AppStack() {
-    // const route = useRoute();
-    // const {user} = route.params;
-    
     return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator initialRouteName="Main" screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
       <Tab.Screen name="Create Session">{() => <SessionStack />}</Tab.Screen>
       <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
