@@ -10,10 +10,10 @@ import Loading from './frontend/src/components/Loading';
 
 export default function App() {
 
-  const clear = async () => {
-    await clearAll();
-  }
-  clear();
+  // const clear = async () => {
+  //   await clearAll();
+  // }
+  // clear();
   
   return (
     <UserProvider>

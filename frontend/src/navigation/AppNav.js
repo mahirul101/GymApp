@@ -30,6 +30,7 @@ export default function AppNav() {
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{headerShown: false}}>
                     <Stack.Screen name="AppStack" component={AppStack} />
+                    <Stack.Screen name="LoginStack" component={LoginStack} />
                     {/* Optionally include LoginStack here if needed */}
                 </Stack.Navigator>
             </NavigationContainer>
@@ -39,6 +40,7 @@ export default function AppNav() {
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{headerShown: false}}>
                     <Stack.Screen name="LoginStack" component={LoginStack} />
+                    <Stack.Screen name="AppStack" component={AppStack} />
                     {/* Optionally include AppStack here if needed */}
                 </Stack.Navigator>
             </NavigationContainer>
