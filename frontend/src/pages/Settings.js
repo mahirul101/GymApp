@@ -1,26 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "react-native";
 
 const Settings = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Text style={styles.title}>Settings</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("LoginStack")}
-      >
-        <Text style={styles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("LoginStack")}
+        >
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
 
-      {/* Additional settings items can be added here */}
-    </View>
+        <Button title="Back to Profile" onPress={() => navigation.goBack()} />
+
+        {/* Additional settings items can be added here */}
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     backgroundColor: "#fff",
   },
