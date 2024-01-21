@@ -22,18 +22,18 @@ export default function Sessions() {
 
   const sessions = [
     {
-      workoutName: "Leg Day",
+      workoutType: "Leg Day",
       date: "14 January 2024",
       time: "5:15PM",
       location: "Buzzfit DDO",
-      user: "sayem",
+      creator: "sayem",
     },
     {
-      workoutName: "Leg Day",
+      workoutType: "Leg Day",
       date: "14 January 2024",
       time: "5:15PM",
       location: "Buzzfit DDO",
-      user: "sayem",
+      creator: "sayem",
     },
   ];
 
@@ -62,11 +62,11 @@ export default function Sessions() {
               {sessions.map((session, index) => (
                 <SessionCard
                   key={index}
-                  workoutName={session.workoutName}
+                  workoutType={session.workoutType}
                   date={session.date}
                   time={session.time}
                   location={session.location}
-                  user={session.user}
+                  creator={session.creator}
                 />
               ))}
             </View>

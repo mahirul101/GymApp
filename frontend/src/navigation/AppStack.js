@@ -8,10 +8,12 @@ import { Ionicons } from "@expo/vector-icons";
 import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
+
 import Profile from "../pages/Profile";
 import Chatbot from "../pages/Chatbot";
-import SessionStack from './SessionStack';
+import SessionStack from "./SessionStack";
 import Settings from "../pages/Settings";
+
 import { useRoute } from '@react-navigation/native';
 
 const MainPage = "Main";
@@ -20,8 +22,6 @@ const CalendarPage = "Calendar";
 const ProfilePage = "Profile";
 const ChatbotPage = "Chatbot";
 const SettingsPage = "Settings";
-
-
 
 const Tab = createBottomTabNavigator();
 

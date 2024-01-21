@@ -4,19 +4,50 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { Avatar } from 'react-native-elements';
+import { useUser } from '../../../backend/User';
+import { addJoinSession, removeJoinSession } from '../../../backend/Database';
 
-const SessionCard = ({ workoutName, date, time, location, user }) => {
+const SessionCard = ({ workoutType, date, time, location, creator }) => {
     const [isSelected, setIsSelected] = useState(false);
+    const { user, setUser } = useUser();
+    if (user == null) return;
 
-    const selectSession = () => {
-        setIsSelected(!isSelected);
+    const selectSession = async () => {
+        if (!isSelected) {
+            try {
+                const data = await addJoinSession(user.email, creator, workoutType, location, date, time);
+
+                if (data.success) {
+                    setUser(data.userDetails);
+                    alert(data.message);
+                    // console.log(user)
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert("Error adding joined session: " + error.message);
+            }
+        } else {
+            try {
+                const data = await removeJoinSession(user.email, creator, workoutType, location, date, time);
+                if (data.success) {
+                    alert(data.message);
+                    console.log('success');
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert("Error removing joined session: " + error.message);
+            }
+
+        }
     };
 
     return (
         <View style={isSelected ? styles.shrinkCard : styles.cardContainer}>
             <View>
                 <View>
-                    <Text style={styles.cardTitle}>{workoutName}</Text>
+                    <Text style={styles.cardTitle}>{workoutType}</Text>
                 </View>
                 {!isSelected && (
                     <>
@@ -36,6 +67,8 @@ const SessionCard = ({ workoutName, date, time, location, user }) => {
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingBottom:10   }}>
                                 <AntDesign name='user' size={24} color='black' />
                                 <Text style = {{ fontWeight: 'bold'}}>{user}</Text>
+
+        
                             </View>
                         </View>
                     </>)}

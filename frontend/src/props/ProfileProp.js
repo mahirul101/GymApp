@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 15,
     marginRight: 20,
+    borderWidth: 2, 
+    borderColor: 'black'
   },
   fullName: {
     fontSize: 20,
