@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Animated, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, Animated, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
 export default class FloatingButton extends React.Component {
@@ -7,11 +7,11 @@ export default class FloatingButton extends React.Component {
         const { onPress } = this.props;
         return (
             <View style={styles.container}>
-                <TouchableWithoutFeedback onPress={onPress}>
+                <TouchableOpacity onPress={onPress}>
                     <Animated.View style={[styles.button, styles.menu]}>
                         <AntDesign name="plus" size={25} color="#fff" />
                     </Animated.View>
-                </TouchableWithoutFeedback>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -20,8 +20,8 @@ export default class FloatingButton extends React.Component {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 60,
-        right: 10,
+        left: 330,
+        bottom: 10,
     },
 
     menu: {
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: 60,
-        height: 60,
+        width: 40,
+        height: 40,
         borderRadius: 30,
         backgroundColor: '#ee6e73',
         justifyContent: 'center',

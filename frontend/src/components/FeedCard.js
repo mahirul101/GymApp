@@ -1,11 +1,13 @@
-import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Avatar } from 'react-native-elements';
 
 const FeedCard = ({ username, date, workoutName, duration, calories, photoUrl }) => {
+    const [isLiked, setIsLiked] = useState(false);
+
     return (
         <View style={styles.container}>
             <View style={styles.cardContainer}>
@@ -28,13 +30,15 @@ const FeedCard = ({ username, date, workoutName, duration, calories, photoUrl })
                     <Text style={styles.titleStyle}>{workoutName}</Text>
                     <View style={{ ...styles.iconLabelStyle, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
-                            <Entypo name='clock' size="20" />
+                            <Entypo name='clock' />
                             <Text>{duration}</Text>
-                            <FontAwesome5 name='running' size="20" />
+                            <FontAwesome5 name='running' />
                             <Text>{calories}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 5, }}>
-                            <AntDesign name='like2' size="20" />
+                            <TouchableOpacity onPress={() => { setIsLiked(!isLiked) }}>
+                                <AntDesign name={isLiked ? 'like2' : 'like1'} size="20" />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
         width: deviceWidth - 20,
         alignItems: 'center',
         marginTop: 25,
+        marginLeft: 10,
     },
     cardContainer: {
         width: deviceWidth - offset,
