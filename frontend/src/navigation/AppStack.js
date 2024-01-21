@@ -8,17 +8,21 @@ import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
 import Profile from "../pages/Profile";
+import Chatbot from "../pages/Chatbot";
 import SessionStack from './SessionStack';
 
 const Tab = createBottomTabNavigator();
 
 export default function AppStack() {
-    return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name='Main' component={Main} />
-            <Tab.Screen name='Create Session' component={SessionStack} />
-            <Tab.Screen name='Calendar' component={Calendar} />
-            <Tab.Screen name="Profile" component={Profile} />
-        </Tab.Navigator>
-    );
-};
+  return (
+    // <NavigationContainer>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
+      <Tab.Screen name="Create Session">{() => <Sessions />}</Tab.Screen>
+      <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
+      <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
+      <Tab.Screen name="Chatbot">{() => <Chatbot />}</Tab.Screen>
+    </Tab.Navigator>
+    // </NavigationContainer>
+  );
+}

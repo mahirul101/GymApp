@@ -7,18 +7,25 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const openai = new OpenAI({
-    organization: "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",
+    apiKey: "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",
   });
 
   const fetchCompletion = async () => {
     setIsLoading(true);
     try {
       const response = await openai.chat.completions.create({
-        messages: [{ role: "system", content: "You are a helpful assistant." }],
+        messages: [
+          {
+            role: "system",
+            content:
+              "Hi, I am 20 years old, 150lbs, 5ft4in, intermediate lifter with no health concerns and I want to bench 225lbs in 3 months, I currently bench 185lbs. Create me a personalized workout plan",
+          },
+        ],
         model: "gpt-3.5-turbo",
       });
 
       setCompletion(response.choices[0].message.content);
+      console.log(response.choices[0].message.content);
     } catch (error) {
       console.error("Error fetching completion:", error);
       setCompletion("Error fetching response.");
