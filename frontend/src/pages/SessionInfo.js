@@ -16,17 +16,21 @@ import { useNavigation } from "@react-navigation/native";
 import SelectList from "react-native-dropdown-select-list";
 import axios from "axios";
 import Config from "react-native-config";
+import { addMySession } from "../../../backend/Database";
+import {useUser} from "../../../backend/User";
 
 function SessionInfo() {
   const [WorkoutType, setWorkoutType] = React.useState("");
   const [Location, setLocation] = React.useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [date, setDate] = React.useState(new Date());
-  const [Time, setTime] = React.useState("");
+  const [Time, setTime] = React.useState(new Date());
 
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
 
+  const {user} = useUser();
+  if (user === null) return;
 
   const [selected, setSelected] = React.useState("");
 
@@ -39,7 +43,7 @@ function SessionInfo() {
 
   const navigation = useNavigation();
 
-  const SessionInfo = () => {
+  const SessionInfo = async () => {
     if (WorkoutType === "") {
       alert("Please select your workout type");
       return;
@@ -49,13 +53,26 @@ function SessionInfo() {
     } else if (date === "") {
       alert("Please enter the date of the workout");
       return;
-    } else if (Time === "") {
-      alert("Please set the time of your workout");
-      return;
+    } 
+  
+    const [datePart, timePart] = date.toISOString().split('T');
+    const formattedTime = timePart.split(".")[0];
+  
+    try {
+      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, formattedTime);
+  
+      console.log(data);
+      if (data.success) {
+        alert(data.message);
+        navigation.navigate("Calendar");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      alert("Error adding session: " + error.message);
     }
-
-    navigation.navigate("SessionStack");
   };
+  
 
   const handleLocationChange = async (text) => {
     setLocation(text);
@@ -163,7 +180,9 @@ function SessionInfo() {
                   mode="time"
                   is24Hour={true}
                   display="default"
+                
                   onChange={onChange}
+                
               />
           </View>
       </View>
