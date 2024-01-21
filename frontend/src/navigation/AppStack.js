@@ -13,13 +13,13 @@ const Tab = createBottomTabNavigator();
 
 export default function AppStack() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
-        <Tab.Screen name="Create Session">{() => <Sessions />}</Tab.Screen>
-        <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
-        <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
+      <Tab.Screen name="Create Session">{() => <Sessions />}</Tab.Screen>
+      <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
+      <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
+    </Tab.Navigator>
+    // </NavigationContainer>
   );
 }

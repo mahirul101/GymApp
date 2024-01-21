@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native"
 import SessionCard from "../components/SessionCard";
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Dev() {
 
@@ -22,28 +23,30 @@ export default function Dev() {
     ];
 
     return (
-        <View>
-            <View style={styles.container}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>Upcoming Sessions</Text>
-                    <AntDesign name='filter' size={20} right={20}></AntDesign>
-                </View>
-                <ScrollView>
-                    <View style={styles.allSessions}>
-                        {sessions.map((session, index) => (
-                            <SessionCard
-                                key={index}
-                                workoutName={session.workoutName}
-                                date={session.date}
-                                time={session.time}
-                                location={session.location}
-                                user={session.user}
-                            />
-                        ))}
+        <SafeAreaView>
+            <View>
+                <View style={styles.container}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>Upcoming Sessions</Text>
+                        <AntDesign name='filter' size={20} right={20}></AntDesign>
                     </View>
-                </ScrollView>
-            </View>
-        </View >)
+                    <ScrollView>
+                        <View style={styles.allSessions}>
+                            {sessions.map((session, index) => (
+                                <SessionCard
+                                    key={index}
+                                    workoutName={session.workoutName}
+                                    date={session.date}
+                                    time={session.time}
+                                    location={session.location}
+                                    user={session.user}
+                                />
+                            ))}
+                        </View>
+                    </ScrollView>
+                </View>
+            </View >
+        </SafeAreaView>)
 }
 
 const deviceWidth = Math.round(Dimensions.get('window').width);
