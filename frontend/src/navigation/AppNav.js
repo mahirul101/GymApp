@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginStack from './LoginStack';
 import AppStack from './AppStack';
@@ -28,7 +28,7 @@ export default function AppNav() {
     if (user) {
         return (
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="AppStack" component={AppStack} />
                     <Stack.Screen name="LoginStack" component={LoginStack} />
                     <Stack.Screen name="Settings" component={Settings} />
@@ -39,7 +39,7 @@ export default function AppNav() {
     } else {
         return (
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="LoginStack" component={LoginStack} />
                     <Stack.Screen name="AppStack" component={AppStack} />
                     <Stack.Screen name="Settings" component={Settings} />
