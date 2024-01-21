@@ -1,6 +1,14 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import Post from "../pages/Post";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const ProfileProp = ({
   fullName,
@@ -13,42 +21,59 @@ const ProfileProp = ({
 }) => {
   return (
     <>
-      <View style={styles.container}>
-        <View style={styles.userContainer}>
-          <Image source={{ uri: userImage }} style={styles.image} />
-          <View>
-            <Text style={styles.fullName}>{fullName}</Text>
-            <Text style={styles.username}>@{username}</Text>
+      <View style={styles.topBar}>
+        <TouchableOpacity onPress={() => console.log("Settings Pressed")}>
+          <MaterialIcons name="settings" size={30} color="black" />
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.userContainer}>
+            <Image source={{ uri: userImage }} style={styles.image} />
+            <View>
+              <Text style={styles.fullName}>{fullName}</Text>
+              <Text style={styles.username}>@{username}</Text>
+            </View>
+          </View>
+          <View style={styles.followContainer}>
+            <Text style={styles.followText}>
+              <Text style={{ fontWeight: "bold" }}>{posts} </Text>
+              Posts
+            </Text>
+            <Text style={styles.followText}>
+              <Text style={{ fontWeight: "bold" }}>{followers} </Text>
+              Followers
+            </Text>
+            <Text style={styles.followText}>
+              <Text style={{ fontWeight: "bold" }}>{following} </Text>
+              Following
+            </Text>
           </View>
         </View>
-        <View style={styles.followContainer}>
-          <Text style={styles.followText}>
-            <Text style={{ fontWeight: "bold" }}>{posts} </Text>
-            Posts
-          </Text>
-          <Text style={styles.followText}>
-            <Text style={{ fontWeight: "bold" }}>{followers} </Text>
-            Followers
-          </Text>
-          <Text style={styles.followText}>
-            <Text style={{ fontWeight: "bold" }}>{following} </Text>
-            Following
-          </Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>About</Text>
+          <Text style={styles.sectionContent}>{aboutBio}</Text>
         </View>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>About</Text>
-        <Text style={styles.sectionContent}>{aboutBio}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Recent Posts</Text>
-        <Post />
-      </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recent Posts</Text>
+          <Post />
+        </View>
+      </ScrollView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  topBar: {
+    width: "100%",
+    height: 50,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingRight: 10,
+    backgroundColor: "#fff",
+  },
   container: {
     alignItems: "center",
     justifyContent: "center",
@@ -56,6 +81,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderBottomWidth: 3,
     borderBottomColor: "#dadada",
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   userContainer: {
     flexDirection: "row", // Align children horizontally
@@ -102,13 +129,6 @@ const styles = StyleSheet.create({
   },
   followText: {
     fontSize: 16,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  goalItem: {
-    fontSize: 16,
-    color: "#4a4a4a",
-    marginTop: 2,
   },
   postContainer: {
     marginBottom: 20,

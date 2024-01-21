@@ -22,16 +22,11 @@ const Post = () => {
   ];
 
   return (
-    <ScrollView>
-      <View>
-        {posts.map((post, index) => (
-          <PostProp key={index} post={post} />
-        ))}
-        {posts.map((post) => (
-          <PostProp key={post.id} post={post} />
-        ))}
-      </View>
-    </ScrollView>
+    <View>
+      {posts.map((post, index) => (
+        <PostProp key={index} post={post} />
+      ))}
+    </View>
   );
 };
 

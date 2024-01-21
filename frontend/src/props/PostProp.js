@@ -16,11 +16,11 @@ const PostProp = ({ post }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#fdfdfd",
     padding: 20,
     borderRadius: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 5,

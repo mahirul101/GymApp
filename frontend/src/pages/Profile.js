@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import ProfileProp from "../props/ProfileProp";
 import Post from "./Post";
 
@@ -21,18 +21,17 @@ const UserProfileScreen = () => {
   ];
 
   return (
-    <View>
+    <SafeAreaView>
       <ProfileProp
         fullName={fullName}
         username={username}
         userImage={userImage}
-        aboutBio={aboutBio}
-        posts={posts}
         followers={followers}
         following={following}
+        aboutBio={aboutBio}
+        posts={posts}
       />
-      <Post />
-    </View>
+    </SafeAreaView>
   );
 };
 
