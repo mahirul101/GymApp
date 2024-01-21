@@ -8,6 +8,7 @@ import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
 import Profile from "../pages/Profile";
+import Chatbot from "../pages/Chatbot";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,7 @@ export default function AppStack() {
       <Tab.Screen name="Create Session">{() => <Sessions />}</Tab.Screen>
       <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
       <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
+      <Tab.Screen name="Chatbot">{() => <Chatbot />}</Tab.Screen>
     </Tab.Navigator>
     // </NavigationContainer>
   );
