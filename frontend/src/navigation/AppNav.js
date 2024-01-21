@@ -1,28 +1,49 @@
-import { NavigationContainer } from "@react-navigation/native";
-import LoginStack from "./LoginStack";
-import AppStack from "./AppStack";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Profile from "../pages/Profile";
-import Settings from "../pages/Settings";
+import React, {useState, useEffect} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import LoginStack from './LoginStack';
+import AppStack from './AppStack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useUser } from '../../../backend/User';
+import Loading from '../components/Loading';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNav() {
-  let initialRouteName = "LoginStack";
-  if (true) {
-      initialRouteName = 'AppStack';
-  }
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={initialRouteName}
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="LoginStack" component={LoginStack} />
-        <Stack.Screen name="AppStack" component={AppStack} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    const { user } = useUser();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate an async task, e.g., data fetching
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000); // 2 seconds delay
+
+        return () => clearTimeout(timer); // Clean up the timer
+    }, []);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (user) {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{headerShown: false}}>
+                    <Stack.Screen name="AppStack" component={AppStack} />
+                    <Stack.Screen name="LoginStack" component={LoginStack} />
+                    {/* Optionally include LoginStack here if needed */}
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    } else {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{headerShown: false}}>
+                    <Stack.Screen name="LoginStack" component={LoginStack} />
+                    <Stack.Screen name="AppStack" component={AppStack} />
+                    {/* Optionally include AppStack here if needed */}
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
 };
