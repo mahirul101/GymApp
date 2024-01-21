@@ -64,17 +64,20 @@ const SessionCard = ({ workoutType, date, time, location, creator }) => {
                                 <Entypo name='location' size={20} />
                                 <Text style={{ marginLeft: 10 }}>{location}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingBottom:10   }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 10 }}>
                                 <AntDesign name='user' size={24} color='black' />
-                                <Text style = {{ fontWeight: 'bold'}}>{user.username}</Text>
+                                <Text style={{ fontWeight: 'bold' }}>{user.username}</Text>
 
-        
+
                             </View>
                         </View>
                     </>)}
             </View>
             <View style={{ position: 'absolute', right: -40, top: '15%' }}>
-                <TouchableOpacity onPress={() => { selectSession() }}>
+                <TouchableOpacity onPress={() => {
+                    setIsSelected(!isSelected); // Set the value
+                    selectSession(creator, workoutType, date, time, location); // Run the function
+                }}>
                     <View style={{ backgroundColor: isSelected ? 'green' : 'red', width: 40, height: 40, borderRadius: 30, alignItems: 'center', justifyContent: 'center', marginRight: 60 }}>
                         <AntDesign name={isSelected ? 'check' : 'plus'} size={30} color='white' />
                     </View>
