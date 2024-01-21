@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: myAPIKEY,
   });
 
   const fetchCompletion = async () => {
