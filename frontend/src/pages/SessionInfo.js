@@ -20,6 +20,7 @@ import { addMySession } from "../../../backend/Database";
 import { useUser } from "../../../backend/User";
 
 function SessionInfo() {
+  const { user, setUser } = useUser();
   const [WorkoutType, setWorkoutType] = React.useState("");
   const [Location, setLocation] = React.useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -29,10 +30,9 @@ function SessionInfo() {
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
 
-  const { user, setUser } = useUser();
-  if (user === null) return;
-
   const [selected, setSelected] = React.useState("");
+
+  const navigation = useNavigation();
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -40,9 +40,6 @@ function SessionInfo() {
     setShowTime(false);
     setDate(currentDate);
   };
-
-  const navigation = useNavigation();
-
   const SessionInfo = async () => {
     if (WorkoutType === "") {
       alert("Please select your workout type");

@@ -7,16 +7,18 @@ import CalendarSession from "../components/CalendarSession";
 
 
 export default function Dev() {
+    const {user} = useUser();
     const swiper = React.useRef();
     const [value, setValue] = React.useState(new Date());
     const [week, setWeek] = React.useState(0);
-    const {user} = useUser();
-    if (user === null) return;
     
     const formatDate = (date) => moment(date).format("MMMM Do, YYYY");
     const formatTime = (time) => moment(time, "HH:mm:ss").format("h:mm A");
 
     const renderSessionsForSelectedDate = () => {
+        if (!user) {
+            return <Text>Loading sessions...</Text>;
+        }
         const selectedDateString = moment(value).format("YYYY-MM-DD");
 
         // Filter and display mySessions for the selected date

@@ -110,11 +110,26 @@ export const addJoinSession = async (email, username, workoutType, location, dat
         };
 
         const user = JSON.parse(userData);
-        user.joinedSessions.push(session);
 
-        await AsyncStorage.setItem(email, JSON.stringify(user));
+        // Check if the session already exists in joinedSessions
+        const sessionExists = user.joinedSessions.find(s =>
+            s.username === session.username &&
+            s.workoutType === session.workoutType &&
+            s.location === session.location &&
+            s.date === session.date &&
+            s.time === session.time
+        );
 
-        return { success: true, message: 'Session added successfully', userDetails: user };
+        if (sessionExists) {
+            return { success: false, message: 'Session already added' };
+        } else {
+            user.joinedSessions.push(session);
+            // console.log(user.joinedSessions.length);
+
+            await AsyncStorage.setItem(email, JSON.stringify(user));
+
+            return { success: true, message: 'Session added successfully', userDetails: user };
+        }
     } catch (error) {
         return { success: false, message: error.message };
     }
@@ -177,6 +192,23 @@ export const removeSession = async (email, username, workoutType, location, date
         } else {
             return { success: false, message: 'Session not found' };
         }
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+};
+
+export const updateAbout = async (email, newAbout) => {
+    try {
+        const userData = await AsyncStorage.getItem(email);
+        if (userData === null) {
+            return { success: false, message: 'User not found' };
+        }
+
+        const user = JSON.parse(userData);
+        user.aboutBio = newAbout; // Update the about section
+
+        await AsyncStorage.setItem(email, JSON.stringify(user));
+        return { success: true, message: 'About updated successfully' };
     } catch (error) {
         return { success: false, message: error.message };
     }

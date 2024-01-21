@@ -23,15 +23,15 @@ export default function Sessions() {
   const sessions = [
     {
       workoutType: "Leg Day",
-      date: "14 January 2024",
-      time: "5:15PM",
+      date: "2024-01-24",
+      time: "07:00:00",
       location: "Buzzfit DDO",
       creator: "sayem",
     },
     {
       workoutType: "Leg Day",
-      date: "14 January 2024",
-      time: "5:15PM",
+      date: "2024-01-24",
+      time: "05:00:00",
       location: "Buzzfit DDO",
       creator: "sayem",
     },

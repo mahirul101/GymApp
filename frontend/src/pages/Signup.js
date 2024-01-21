@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StatusBar, TouchableOpacity, KeyboardAvoidingView, ScrollView, Keyboard, Animated } from 'react-native';
 import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { onRegisterPress } from '../../../backend/Database';
@@ -9,10 +9,42 @@ function SignUp() {
     const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
     const { setUser } = useUser();
 
     const navigation = useNavigation();
-
+    const fadeAnim = React.useRef(new Animated.Value(1)).current;
+    React.useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+          'keyboardWillShow',
+          () => {
+            setKeyboardVisible(true);
+            // Fade out the text when the keyboard appears
+            Animated.timing(fadeAnim, {
+              toValue: 0,
+              duration: 200, // Adjust the duration as needed
+              useNativeDriver: false,
+            }).start();
+          }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardWillHide',
+          () => {
+            setKeyboardVisible(false);
+            // Fade in the text when the keyboard hides
+            Animated.timing(fadeAnim, {
+              toValue: 1,
+              duration: 200, // Adjust the duration as needed
+              useNativeDriver: false,
+            }).start();
+          }
+        );
+    
+        return () => {
+          keyboardDidShowListener.remove();
+          keyboardDidHideListener.remove();
+        };
+      }, [fadeAnim]);
     const SignUp = async () => {
         if (fullName === '') {
             alert('Please enter your full name');
@@ -44,12 +76,21 @@ function SignUp() {
 
     }
     return (
-        <View className="bg-white h-full w-full">
+    <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior="padding"
+    >
+        <View className="bg-white h-full w-full pb-6">
             <StatusBar style="light" />
-
             <View className="flex-1 justify-around pt-40 pb-10">
                 <View className="items-center">
-                    <Text className="text-5xl font-bold">Sign Up</Text>
+                <Animated.Text className="text-5xl font-bold"
+                style={{
+                  opacity: fadeAnim, // Apply opacity animation
+                }}
+              >
+                Sign Up
+              </Animated.Text>
                 </View>
 
                 <View className="mx-4 space-y-4">
@@ -92,9 +133,6 @@ function SignUp() {
                             <Text className="text-center text-white font-bold">Sign Up</Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="">
-                        <Text className="text-center">By signing up, you agree to our Terms, Data Policy and Cookies Policy.</Text>
-                    </View>
                     <View className="flex-row justify-center">
                         <Text>Already have an account? </Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -104,6 +142,7 @@ function SignUp() {
                 </View>
             </View>
         </View>
+    </KeyboardAvoidingView>
     );
 
 }

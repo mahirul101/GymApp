@@ -16,11 +16,12 @@ import { useUser } from "../../../backend/User";
 import { addJoinSession, removeJoinSession } from "../../../backend/Database";
 
 const SessionCard = ({ workoutType, date, time, location, creator }) => {
-  const [isSelected, setIsSelected] = useState(false);
   const { user, setUser } = useUser();
+  const [isSelected, setIsSelected] = useState(false);
 
-  const cardHeight = useRef(new Animated.Value(140)).current;
-  if (user == null) return;
+  if (!user) {
+    return <Text>User data is not available</Text>;
+  }
 
   const selectSession = async () => {
     if (!isSelected) {
