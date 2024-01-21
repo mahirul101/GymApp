@@ -11,16 +11,12 @@ import {
 
 import { Picker } from 'react-native-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import SelectList from 'react-native-dropdown-select-list';
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useContext } from "react";
 import SelectList from "react-native-dropdown-select-list";
-import { useNavigation } from "@react-navigation/native";
 import RNPickerSelect from "react-native-picker-select";
 import axios from "axios";
 import Config from "react-native-config";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import SelectList from 'react-native-dropdown-select-list';
 
 function SessionInfo() {
   const apiKey = Config.GOOGLEMAPS_API_KEY;
@@ -203,11 +199,3 @@ function SessionInfo() {
 }
 
 export default SessionInfo;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
