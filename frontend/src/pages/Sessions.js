@@ -23,15 +23,15 @@ export default function Sessions() {
   const sessions = [
     {
       workoutType: "Leg Day",
-      date: "14 January 2024",
-      time: "5:15PM",
+      date: "2024-01-24",
+      time: "07:00:00",
       location: "Buzzfit DDO",
       creator: "sayem",
     },
     {
       workoutType: "Leg Day",
-      date: "14 January 2024",
-      time: "5:15PM",
+      date: "2024-01-24",
+      time: "05:00:00",
       location: "Buzzfit DDO",
       creator: "sayem",
     },
@@ -51,7 +51,7 @@ export default function Sessions() {
             {/* <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>
               Upcoming Sessions
             </Text> */}
-                <Text style = {styles.title}>Upcoming Sessions</Text>
+            <Text style={styles.title}>Upcoming Sessions</Text>
             <FloatingButton
               onPress={() => navigation.navigate("SessionInfo")}
             />
@@ -83,15 +83,15 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
   container: {
-        paddingVertical: 5,
+    paddingVertical: 5,
   },
 
-    title:{
-            fontSize: 30,
-            fontWeight: 'bold',
-            color: '#333',
-            marginLeft: 20, marginBottom: 10, marginTop: 20
-    },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#333',
+    marginLeft: 20, marginBottom: 10, marginTop: 20
+  },
   cardTitle: {
     fontSize: 20,
     marginLeft: 10,
