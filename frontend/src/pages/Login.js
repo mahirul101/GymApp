@@ -1,13 +1,16 @@
 import React, {useContext} from 'react';
 import {View, Text, TextInput, StatusBar, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {onLoginPress} from '../../../backend/Database';
+import {useUser, saveUser} from '../../../backend/User';
 
 function Login() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const { setUser } = useUser();
     const navigation = useNavigation();
     
-    const login = () => {
+    const login = async () => {
         if (email === '') {
             alert('Please enter your email');
             return;
@@ -16,7 +19,18 @@ function Login() {
             return;
         }
 
-        navigation.navigate('AppStack')
+        const data = await onLoginPress(email, password);
+
+        user = data.userDetails;
+
+        if (data.success) {
+            const user = data.userDetails;
+            setUser(user);
+            navigation.navigate('AppStack', {user});
+        } else {
+            message = data.message;
+            alert(message);
+        }
     }
 
     return (
@@ -33,7 +47,7 @@ function Login() {
                         <TextInput 
                             placeholder="Email" 
                             value={email}
-                            onTextInput={setEmail}
+                            onChangeText={setEmail}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                         />
@@ -42,7 +56,7 @@ function Login() {
                         <TextInput 
                             placeholder="Password" 
                             value={password}
-                            onTextInput={setPassword}
+                            onChangeText={setPassword}
                             placeholderTextColor="gray"
                             className="text-black" // Adjust the text color to ensure visibility
                             secureTextEntry
