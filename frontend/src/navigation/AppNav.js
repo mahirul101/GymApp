@@ -1,19 +1,22 @@
-import { View, Text, ActivityIndicator } from 'react-native';
-import React, { useContext } from 'react'
-
+import React, {useContext} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import LoginStack from './LoginStack';
+import AppStack from './AppStack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function AppNav() {
+    let initialRouteName = 'LoginStack';
+    // if (true) {
+    //     initialRouteName = 'AppStack';
+    // }
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Home" component={Home} />
+            <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="LoginStack" component={LoginStack} />
+                <Stack.Screen name="AppStack" component={AppStack} />
             </Stack.Navigator>
         </NavigationContainer>
-    )
+    );
 };
