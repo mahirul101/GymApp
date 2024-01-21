@@ -7,15 +7,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import Main from "../pages/Main";
 import Sessions from "../pages/Sessions";
 import Calendar from "../pages/Calendar";
+import {useRoute} from '@react-navigation/native';
 import Profile from "../pages/Profile";
 import Chatbot from "../pages/Chatbot";
 import SessionStack from './SessionStack';
-
 const Tab = createBottomTabNavigator();
 
 export default function AppStack() {
-  return (
-    // <NavigationContainer>
+    // const route = useRoute();
+    // const {user} = route.params;
+    
+    return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
       <Tab.Screen name="Create Session">{() => <SessionStack />}</Tab.Screen>
@@ -23,6 +25,5 @@ export default function AppStack() {
       <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
       <Tab.Screen name="Chatbot">{() => <Chatbot />}</Tab.Screen>
     </Tab.Navigator>
-    // </NavigationContainer>
-  );
-}
+    );
+};
