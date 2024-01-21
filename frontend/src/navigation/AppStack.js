@@ -18,7 +18,7 @@ export default function AppStack() {
     // <NavigationContainer>
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Main">{() => <Main />}</Tab.Screen>
-      <Tab.Screen name="Create Session">{() => <Sessions />}</Tab.Screen>
+      <Tab.Screen name="Create Session">{() => <SessionStack />}</Tab.Screen>
       <Tab.Screen name="Calendar">{() => <Calendar />}</Tab.Screen>
       <Tab.Screen name="Profile">{() => <Profile />}</Tab.Screen>
       <Tab.Screen name="Chatbot">{() => <Chatbot />}</Tab.Screen>

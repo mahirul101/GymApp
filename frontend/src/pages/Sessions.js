@@ -14,6 +14,11 @@ export default function Sessions() {
   //     // Navigate to the desired screen or modal
   //     navigation.navigate('SessionInfo');
   // };
+  // const handleFloatingButtonPress = () => {
+  //     alert('Floating Button Pressed')
+  //     // Navigate to the desired screen or modal
+  //     navigation.navigate('SessionInfo');
+  // };
 
   const sessions = [
     {
