@@ -29,8 +29,9 @@ function SessionInfo() {
   const [showDate, setShowDate] = React.useState(false);
   const [showTime, setShowTime] = React.useState(false);
 
-  const {user} = useUser();
+  const {user, setUser} = useUser();
   if (user === null) return;
+  
 
   const [selected, setSelected] = React.useState("");
 
@@ -54,6 +55,28 @@ function SessionInfo() {
       alert("Please enter the date of the workout");
       return;
     } 
+
+    const workoutItems = [
+      { label: 'Cardio', value: 'cardio' },
+      { label: 'Arms', value: 'arms' },
+      { label: 'Chest', value: 'chest' },
+      { label: 'Back', value: 'back' },
+      { label: 'Shoulders', value: 'shoulders' },
+      { label: 'Legs', value: 'legs' },
+      { label: 'Upper Body', value: 'upperbody' },
+      { label: 'Lower Body', value: 'lowerbody' },
+    ];
+  
+    const [WorkoutType, setWorkoutType] = useState('');
+  
+    const handleWorkoutTypeChange = (value) => {
+      const selectedItem = workoutItems.find(item => item.value === value);
+      if (selectedItem) {
+        setWorkoutType(selectedItem.label);
+      } else {
+        setWorkoutType('');
+      }
+    };
   
     const [datePart, timePart] = date.toISOString().split('T');
     const formattedTime = timePart.split(".")[0];
@@ -64,6 +87,7 @@ function SessionInfo() {
       console.log(data);
       if (data.success) {
         alert(data.message);
+        setUser(data.userDetails);
         navigation.navigate("Calendar");
       } else {
         alert(data.message);
@@ -111,14 +135,14 @@ function SessionInfo() {
             <RNPickerSelect
               onValueChange={(value) => setWorkoutType(value)}
               items={[
-                { label: "Cardio", value: "cardio" },
-                { label: "Arms", value: "arms" },
-                { label: "Chest", value: "chest" },
-                { label: "Back", value: "back" },
-                { label: "Shoulders", value: "shoulders" },
-                { label: "Legs", value: "legs" },
-                { label: "Upper Body", value: "upperbody" },
-                { label: "Lower Body", value: "lowerbody" },
+                { label: "Cardio", value: "Cardio" },
+                { label: "Arms", value: "Arms" },
+                { label: "Chest", value: "Chest" },
+                { label: "Back", value: "Back" },
+                { label: "Shoulders", value: "Shoulders" },
+                { label: "Legs", value: "Legs" },
+                { label: "Upper Body", value: "Upperbody" },
+                { label: "Lower Body", value: "Lowerbody" },
               ]}
               placeholder={{
                 label: "Select a workout type...",

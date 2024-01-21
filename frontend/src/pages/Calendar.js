@@ -1,13 +1,50 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity} from "react-native"
+import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView} from "react-native"
 import React from 'react'
 import moment from 'moment'
 import Swiper from 'react-native-swiper'
+import {useUser} from "../../../backend/User";
+import CalendarSession from "../components/CalendarSession";
+
 
 export default function Dev() {
     const swiper = React.useRef();
     const [value, setValue] = React.useState(new Date());
-    const [week, setWeek]  = React.useState(0);
+    const [week, setWeek] = React.useState(0);
+    const {user} = useUser();
+    if (user === null) return;
+    
+    const formatDate = (date) => moment(date).format("MMMM Do, YYYY");
+    const formatTime = (time) => moment(time, "HH:mm:ss").format("h:mm A");
 
+    const renderSessionsForSelectedDate = () => {
+        const selectedDateString = moment(value).format("YYYY-MM-DD");
+
+        // Filter and display mySessions for the selected date
+        const mySessionsForDate = user.mySessions.filter(session => 
+            moment(session.date).format("YYYY-MM-DD") === selectedDateString
+        );
+
+        // Filter and display joinedSessions for the selected date
+        const joinedSessionsForDate = user.joinedSessions.filter(session => 
+            moment(session.date).format("YYYY-MM-DD") === selectedDateString
+        );
+
+        // Combine both arrays
+        const allSessionsForDate = [...mySessionsForDate, ...joinedSessionsForDate];
+
+        if (allSessionsForDate.length === 0) {
+            return <Text>No sessions for this date</Text>;
+        }
+
+        return allSessionsForDate.map((session, index) => (
+            <CalendarSession 
+                key={index}
+                workoutName={session.workoutType}
+                date={formatDate(session.date)}
+                time={formatTime(session.time)}
+            />
+        ));
+    };
 
     const weeks = React.useMemo(() => {
         const start = moment().add(week, 'weeks').startOf('week');
@@ -105,9 +142,11 @@ export default function Dev() {
 
 
                     <View style = {styles.placeholder}>
-                        <View style = {styles.placeholderContent}>
-                        {/*ADD STUFF HERE*/}
-                        </View>
+                        <ScrollView>
+                        <View style={styles.placeholderContent}>
+                            {renderSessionsForSelectedDate()}
+                            </View>
+                            </ScrollView>
                     </View>
 
                     <View style = {styles.footer}>
