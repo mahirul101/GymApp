@@ -65,8 +65,8 @@ export default function Dev() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <View style = {styles.header}>
-                    <Text style = {styles.title}>Timetable</Text>
+                <View style={{ ...styles.header, borderBottomWidth: '1', borderColor: '#c2c5cc' }}>
+                  <Text style={styles.title}>Timetable</Text>
                 </View>
 
                 <View style={styles.picker}>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 32,
+        fontSize: 30,
         fontWeight: 'bold',
         color: '#333',
         marginBottom: 12,
@@ -256,9 +256,9 @@ const styles = StyleSheet.create({
       /** Button */
       btn: {
         flexDirection: 'row',
-        backgroundColor: '#007aff',
+        backgroundColor: '#B91C1C',
         borderWidth: 1,
-        borderColor: '#007aff',
+        borderColor: '#B91C1C',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 8,

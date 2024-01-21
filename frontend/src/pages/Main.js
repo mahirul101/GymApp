@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, ScrollView, StyleSheet } from "react-native"
 import FeedCard from "../components/FeedCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -6,8 +6,10 @@ export default function Dev() {
 
     return (
         <SafeAreaView>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: '1', borderColor: '#c2c5cc' }}>
-                <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 10 }}>Feed</Text>
+            
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: '1', borderColor: '#c2c5cc', flex:'0', paddingVertical: 5 }}>
+                {/* <Text style={{ fontSize: 20, marginLeft: 20, marginBottom: 10, marginTop: 20 }}>Feed</Text> */}
+                <Text style = {styles.title}>Feed</Text>
             </View>
             <ScrollView>
                 <FeedCard
@@ -35,3 +37,12 @@ export default function Dev() {
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    title:{
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: '#333',
+            marginLeft: 20, marginBottom: 10, marginTop: 20
+    },
+})

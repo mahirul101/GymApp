@@ -213,14 +213,21 @@ function SessionInfo() {
       </View> 
 
     
-      <View className="w-full">
-          <TouchableOpacity
+      <View style = {styles.footer}>
+
+          {/* <TouchableOpacity
           onPress={SessionInfo}
           className="w-80 bg-red-700 p-4 rounded-2xl mb-20 mx-auto text-center"
           
           >
-          <Text className="text-center text-white font-bold">Create Session</Text>
-          </TouchableOpacity>
+          <Text className="text-center text-white font-bold text-base font-semibold">Create Session</Text>
+          </TouchableOpacity> */}
+
+<TouchableOpacity style = {styles.btn} onPress={() => {
+                           //handle create session 
+                        }}>
+                            <Text style = {styles.btnText}>Create Session</Text>
+                        </TouchableOpacity>
       </View>
       </View>
       </View>
@@ -229,3 +236,34 @@ function SessionInfo() {
 
 
 export default SessionInfo;
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  footer:{
+    marginTop: 24,  
+    paddingHorizontal: 16,
+  },
+        /** Button */
+        btn: {
+          flexDirection: 'row',
+          backgroundColor: '#B91C1C',
+          borderWidth: 1,
+          borderColor: '#B91C1C',
+          paddingVertical: 10,
+          paddingHorizontal: 20,
+          borderRadius: 8,
+          alignItems: 'center',
+          justifyContent: 'center',
+          
+        },
+        btnText: {
+          fontSize: 18,
+          fontWeight: '600',
+          color: '#fff',
+        },
+});
+

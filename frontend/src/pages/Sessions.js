@@ -48,9 +48,10 @@ export default function Sessions() {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>
+            {/* <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 20 }}>
               Upcoming Sessions
-            </Text>
+            </Text> */}
+                <Text style = {styles.title}>Upcoming Sessions</Text>
             <FloatingButton
               onPress={() => navigation.navigate("SessionInfo")}
             />
@@ -82,11 +83,15 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
   container: {
-    width: deviceWidth,
-    // alignItems: 'center',
-    marginTop: 25,
-    border: "solid",
+        paddingVertical: 5,
   },
+
+    title:{
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: '#333',
+            marginLeft: 20, marginBottom: 10, marginTop: 20
+    },
   cardTitle: {
     fontSize: 20,
     marginLeft: 10,
