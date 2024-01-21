@@ -24,11 +24,30 @@ export default function CalendarSession({ workoutName, date, time }) {
 const styles = StyleSheet.create({
   cardContainer: {
     width: "100%",
-    marginTop: -50,
+    marginTop: -30,
     borderRadius: 10,
-    backgroundColor: "#c2c5cc",
+    backgroundColor: "#fff",
     padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+    padding: 15,
+  justifyContent: "space-between",
+  marginTop: -48,
+
   },
+
+ 
+  
+  // flexDirection: "row",
+  // alignItems: "center",
+  
+
+
+
+
   cardTitle: {
     fontSize: 20,
     fontWeight: "800",
