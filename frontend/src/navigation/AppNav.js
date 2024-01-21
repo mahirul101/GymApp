@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginStack from "./LoginStack";
 import AppStack from "./AppStack";
