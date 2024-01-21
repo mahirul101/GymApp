@@ -9,13 +9,13 @@ export const clearAll = async () => {
     }
 }
 
-export const onRegisterPress = async (email, password, username, fullName) => {
+export const onRegisterPress = async (email, password, fullName, username) => {
     try {
         email = email.toLowerCase();
         // Check if user already exists
         const existingUser = await AsyncStorage.getItem(email);
         if (existingUser !== null) {
-            return {success: false, message: 'Email already exists'};
+            return { success: false, message: 'Email already exists' };
         }
 
         // Save the new user
@@ -26,9 +26,9 @@ export const onRegisterPress = async (email, password, username, fullName) => {
             fullName
         };
         await AsyncStorage.setItem(email, JSON.stringify(newUser));
-        return {success: true, message: 'User registered successfully', userDetails: newUser};
+        return { success: true, message: 'User registered successfully', userDetails: newUser };
     } catch (error) {
-        return {success: false, message: error.message};
+        return { success: false, message: error.message };
     }
 };
 
@@ -37,17 +37,17 @@ export const onLoginPress = async (email, password) => {
         email = email.toLowerCase();
         const userData = await AsyncStorage.getItem(email);
         if (userData === null) {
-            return {success: false, message: 'Email or password is incorrect'};
+            return { success: false, message: 'Email or password is incorrect' };
         }
 
         const user = JSON.parse(userData);
         if (user.password === password) { // Ensure password hashing in real apps
-            return {success: true, message: 'Login successful', userDetails: user};
+            return { success: true, message: 'Login successful', userDetails: user };
         } else {
-            return {success: false, message: 'Invalid credentials'};
+            return { success: false, message: 'Invalid credentials' };
         }
     } catch (error) {
-        return {success: false, message: error.message};
+        return { success: false, message: error.message };
     }
 };
 
