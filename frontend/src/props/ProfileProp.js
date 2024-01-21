@@ -71,10 +71,11 @@ const ProfileProp = ({
 const styles = StyleSheet.create({
   topBar: {
     width: "100%",
-    height: 50,
+    height: 40,
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
+    paddingTop:10,
     paddingRight: 10,
     backgroundColor: "#fff",
   },
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    marginBottom: 10,
+    marginBottom: 15,
     marginRight: 20,
   },
   fullName: {
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 16,
     color: "gray",
-    marginBottom: 10,
+    marginBottom: 15,
   },
   section: {
     padding: 10,
@@ -121,10 +122,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     marginBottom: 10,
+    marginLeft: 5,
   },
   sectionContent: {
     fontSize: 16,
     color: "#333",
+    marginLeft: 5,
   },
   followContainer: {
     flexDirection: "row",

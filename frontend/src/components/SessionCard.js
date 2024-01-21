@@ -28,19 +28,19 @@ const SessionCard = ({ workoutName, date, time, location, user }) => {
                             <AntDesign name='clockcircleo' size={20} />
                             <Text style={{ marginLeft: 10 }}>{time}</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', gap: 180 }}>
+                        <View style={{ flexDirection: 'row', gap: 140 }}>
                             <View style={styles.footerText}>
                                 <Entypo name='location' size={20} />
                                 <Text style={{ marginLeft: 10 }}>{location}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingBottom:10   }}>
                                 <AntDesign name='user' size={24} color='black' />
-                                <Text>{user}</Text>
+                                <Text style = {{ fontWeight: 'bold'}}>{user}</Text>
                             </View>
                         </View>
                     </>)}
             </View>
-            <View style={{ position: 'absolute', right: -40, top: '20%' }}>
+            <View style={{ position: 'absolute', right: -40, top: '15%' }}>
                 <TouchableOpacity onPress={() => { selectSession() }}>
                     <View style={{ backgroundColor: isSelected ? 'green' : 'red', width: 40, height: 40, borderRadius: 30, alignItems: 'center', justifyContent: 'center', marginRight: 60 }}>
                         <AntDesign name={isSelected ? 'check' : 'plus'} size={30} color='white' />
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     },
     cardTitle: {
         fontSize: 25,
+        fontWeight: 'bold',
         marginLeft: 10,
         marginTop: 5,
     },

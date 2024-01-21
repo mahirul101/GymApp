@@ -7,7 +7,7 @@ export default function Dev() {
     return (
         <SafeAreaView>
             
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: '1', borderColor: '#c2c5cc', flex:'0', paddingVertical: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: '1', borderColor: '#c2c5cc', flex:'0', paddingVertical: 5 }}>
                 {/* <Text style={{ fontSize: 20, marginLeft: 20, marginBottom: 10, marginTop: 20 }}>Feed</Text> */}
                 <Text style = {styles.title}>Feed</Text>
             </View>
