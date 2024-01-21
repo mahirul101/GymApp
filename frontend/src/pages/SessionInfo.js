@@ -35,11 +35,9 @@ function SessionInfo() {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    // Subtract 5 hours from the selected date
-    const adjustedDate = new Date(currentDate.getTime() - 5 * 60 * 60 * 1000);
     setShowDate(false);
     setShowTime(false);
-    setDate(adjustedDate);
+    setDate(currentDate);;
   };
   const SessionInfo = async () => {
     if (WorkoutType === "") {
@@ -72,19 +70,20 @@ function SessionInfo() {
         setWorkoutType("");
       }
     };
-    const datePart = date.toLocaleDateString(); // Local date string
-    const timePart = date.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' }); // Local time string
+    const [datePart, timePart] = date.toISOString().split('T');
+    const formattedTime = timePart.split(".")[0];
 
     console.log(timePart);
 
     try {
-      
-      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, timePart);
 
-      console.log(data);
+      const data = await addMySession(user.email, user.username, WorkoutType, Location, datePart, formattedTime);
+
+      // console.log(data);
       if (data.success) {
         alert(data.message);
         setUser(data.userDetails);
+        console.log(data.userDetails);
         navigation.navigate("Calendar");
       } else {
         alert(data.message);
@@ -93,7 +92,7 @@ function SessionInfo() {
       alert("Error adding session: " + error.message);
     }
   };
-  
+
   const handleLocationChange = async (text) => {
     setLocation(text);
     if (text.length > 2) {

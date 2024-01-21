@@ -16,15 +16,10 @@ export default function Calendar() {
     const { user } = useUser();
 
     const formatDate = (date) => moment(date).format("MMMM Do, YYYY");
-    const formatTime = (time) => {
-        // Assuming 'time' is a string in "HH:mm:ss" format
-        return moment(time, "HH:mm:ss").subtract(5, 'hours').format("h:mm A");
-    };
-    
+    const formatTime = (time) => moment(time, "HH:mm:ss").format("h:mm A");
+
 
     const renderSessionsForSelectedDate = () => {
-        if (user.mySessions.length === 0 && user.joinedSessions.length === 0)
-            return <Text>No sessions for this date</Text>;
         const selectedDateString = moment(value).format("YYYY-MM-DD");
 
         // Filter and display mySessions for the selected date
@@ -53,6 +48,7 @@ export default function Calendar() {
             />
         ));
     };
+
 
     const weeks = React.useMemo(() => {
         const start = moment().add(week, 'weeks').startOf('week');
