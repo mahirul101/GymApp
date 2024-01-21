@@ -12,8 +12,8 @@ import { Picker } from 'react-native-picker';
 import React, { useContext, useState } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import SelectList from 'react-native-dropdown-select-list';
 import { useNavigation } from "@react-navigation/native";
+import SelectList from "react-native-dropdown-select-list";
 import axios from "axios";
 import Config from "react-native-config";
 
@@ -186,11 +186,3 @@ function SessionInfo() {
 
 
 export default SessionInfo;
-
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-});
