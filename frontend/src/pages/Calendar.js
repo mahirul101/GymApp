@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from "react-native"
+import { View, Text, SafeAreaView, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView } from "react-native"
 import React from 'react'
 import moment from 'moment'
 import Swiper from 'react-native-swiper'
@@ -25,6 +25,28 @@ export default function Dev() {
             });
         });
     }, [week]);
+
+    const calendarSessions = [
+        {
+            workoutName: 'Leg Day',
+            date: '14 January 2024',
+            time: '8:30-10:30',
+            // Add more properties here if needed
+        },
+        {
+            workoutName: 'Leg Day',
+            date: '14 January 2024',
+            time: '8:30-10:30',
+            // Add more properties here if needed
+        },
+        {
+            workoutName: 'Leg Day',
+            date: '14 January 2024',
+            time: '8:30-10:30',
+            // Add more properties here if needed
+        },
+        // Add more sessions here
+    ];
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -98,14 +120,24 @@ export default function Dev() {
                     </Swiper>
                 </View>
 
-                <View style={{ flex: 8, paddingVertical: 5, paddingHorizontal: 10 }}>
+                <View style={{ flex: 8, paddingVertical: 10, paddingHorizontal: 10 }}>
                     <Text style={styles.contentText}>{value.toDateString()}</Text>
 
 
                     <View style={styles.placeholder}>
-                        <View style={styles.placeholderContent}>
-                            <CalendarSession />
-                        </View>
+                        <ScrollView>
+                            <View style={styles.placeholderContent}>
+                                {calendarSessions.map((session, index) => (
+                                    <CalendarSession
+                                        key={index}
+                                        workoutName={session.workoutName}
+                                        date={session.date}
+                                        time={session.time}
+                                    // Pass more props here if needed
+                                    />
+                                ))}
+                            </View>
+                        </ScrollView>
                     </View>
 
                     <View style={styles.footer}>
@@ -205,6 +237,8 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexShrink: 1,
         flexBasis: 0,
+        padding: 10,
+
     },
 
     footer: {

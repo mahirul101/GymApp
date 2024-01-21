@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from 'rea
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { Avatar } from 'react-native-elements';
+import { Avatar } from 'react-native-elements'; 4
 
 const FeedCard = ({ username, date, workoutName, duration, calories, photoUrl }) => {
     const [isLiked, setIsLiked] = useState(false);
